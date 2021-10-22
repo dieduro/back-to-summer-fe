@@ -1,0 +1,16 @@
+{
+  "colors": {
+    "primary":
+    {
+      "light": "#F48C06",
+      "DEFAULT": "#E85D04",
+      "dark": "#DC2F02"
+    },
+    "secondary": "#8ecae6",
+    "alternate": "#8ecae6",
+    "dark": "#03071E",
+    "white": "#f6f8ffff",
+    "error": "#E32800",
+    "gray": "#B3B6B7"
+  }
+}

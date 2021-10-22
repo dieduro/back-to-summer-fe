@@ -1,16 +1,51 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/* purgecss end ignore */
+
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    @apply text-primary;
+  }
+
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@layer utilities {
+  @variants responsive {
+      .text-shadow {
+        text-shadow: 2px 2px 4px black;
+      }
+      .text-shadow-md {
+        text-shadow: 4px 4px 8px black;
+      }
+      .text-shadow-lg {
+        text-shadow: 15px 15px 30px black;
+      }
+      .text-shadow-none {
+        text-shadow: none;
+      }
+  } 
 }
 
-* {
-  box-sizing: border-box;
+.debug * {
+  box-shadow: 0 0 1px red;
 }
+
+.visually-hidden {
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  white-space: nowrap; /* added line */
+}
+
+circle {
+  transition: stroke-dashoffset 1.5s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+  

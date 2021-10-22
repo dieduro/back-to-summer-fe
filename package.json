@@ -5,16 +5,32 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
-    "next": "11.1.2",
+    "@agney/react-loading": "^0.1.2",
+    "@tailwindcss/aspect-ratio": "^0.2.2",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "firebase": "^8.6.1",
+    "firebase-admin": "^9.8.0",
+    "firebaseui": "^4.8.0",
+    "formik": "^2.2.6",
+    "luxon": "^1.27.0",
+    "next": "latest",
+    "papaparse": "^5.3.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-timer-hook": "^3.0.5",
+    "scrypt-js": "^3.0.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
+    "autoprefixer": "^10.3.6",
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "postcss": "^8.3.8",
+    "tailwindcss": "^2.2.16"
   }
 }
