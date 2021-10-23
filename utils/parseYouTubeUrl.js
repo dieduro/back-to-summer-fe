@@ -13,8 +13,6 @@ export const parseYouTubeUrl = (questions) => {
             queryParams = question.video.start && `?start=${question.video.start}`
             queryParams = question.video.end && `${queryParams}&end=${question.video.end}`
             question.video.url =`${BASE_URL}${question.youtubeId}${queryParams}`
-            console.log(9090,queryParams)
-            console.log(9091,question.video.url)
         }
     })
     return questions

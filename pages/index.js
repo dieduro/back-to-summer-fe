@@ -9,9 +9,6 @@ import { getTrivia } from "../lib/db";
 
 export default function Index({ trivia }) {
 
-  console.log("HARDY")
-  console.log(process.env)
-
   const { user } = useAuth();
   const colors = theme.colors;
 

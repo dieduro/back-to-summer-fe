@@ -15,7 +15,6 @@ export default function SignIn({ onResetPass }) {
     return new Promise(async (reject) => {
       try {
         await signInWithEmailAndPass(values).then((response) => {
-          console.log(499,response)
           if (response.error) {
             setMessage(response.message);
           }

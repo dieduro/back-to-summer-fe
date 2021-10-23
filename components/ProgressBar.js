@@ -1,9 +1,6 @@
 import classnames from "classnames";
 
 const ProgressBar = ({ time, onFinish, onStart }) => {
-console.log(444,time)
-const animation = `animate-timebar${time}`
-console.log(animation)
   return (
     <div className="bg-white h-4 relative shadow overflow-hidden">
       <div
