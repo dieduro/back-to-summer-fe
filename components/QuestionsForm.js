@@ -168,7 +168,6 @@ const QuestionsForm = ({ questions }) => {
                         >
                           Agregar Pregunta
                         </Button>
-                        {console.log(  !formProps.dirty, !formProps.isValid, formProps.isValidating, formProps.isSubmitting)}
                         {values.questions.length > 0 && (
                           <Button
                             type="submit"
