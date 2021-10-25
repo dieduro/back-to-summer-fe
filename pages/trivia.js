@@ -32,5 +32,6 @@ export async function getStaticProps(context) {
   const trivia = await getTrivia();
   return {
     props: { trivia },
+    revalidate: 10
   };
 }
