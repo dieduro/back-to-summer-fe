@@ -31,7 +31,7 @@ export default function Trivia({ trivia }) {
 export async function getStaticProps(context) {
   const trivia = await getTrivia();
   return {
-    props: { trivia },
+    props: trivia,
     revalidate: 10
   };
 }

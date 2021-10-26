@@ -79,7 +79,7 @@ const Home = ({ trivia }) => {
               <Heading color="primary" className="text-shadow">
                 BACK TO SUMMER{/* {homeContent?.title} */}
               </Heading>
-              <GridGame questions={trivia?.questions} playCb={onPlayQuestion}/>
+              <GridGame questions={trivia} playCb={onPlayQuestion}/>
               
               {/* <div className="mx-auto my-16">
                 {homeContent?.buttonText ? (

@@ -1,9 +1,9 @@
 import React from "react";
 import CreateTrivia from "../components/CreateTrivia";
-import { getTrivia } from "../lib/db";
+import { getQuestions } from "../lib/db";
 
 const AdminPanel = ({ trivia }) => {
-  const questions = trivia?.questions;
+  const questions = trivia?.questions || [];
 
   return <CreateTrivia questions={questions} />
 };
@@ -11,7 +11,7 @@ const AdminPanel = ({ trivia }) => {
 export default AdminPanel;
 
 export async function getServerSideProps(context) {
-  const trivia = await getTrivia();
+  const trivia = await getQuestions();
   return {
     props: { trivia },
   };

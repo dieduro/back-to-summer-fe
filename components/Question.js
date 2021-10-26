@@ -4,7 +4,7 @@ import classnames from "classnames";
 import VideoEmbed from "./VideoEmbed";
 import useAudio from "../hooks/useAudio";
 import { useAuth } from "../lib/auth.js";
-import useWindowDimensions from "../hooks/useWindowsDimensions";
+import { TYPES } from "../utils/questionFormValues"
 import Countdown from "./Countdown";
 import CheckCircle from "../icons/CheckCircle";
 import XCircle from "../icons/XCircle";
@@ -23,7 +23,9 @@ export default function Question({ data, onBackCb }) {
       }
 
       if (answered && timeUsed) {
-        audioRef.current.pause()
+        if (currentQuestion.type == TYPES.AUDIO) {
+          audioRef.current.pause()
+        }
         // db call to store answers, time and generate score
       }
     }, [timeUsed])

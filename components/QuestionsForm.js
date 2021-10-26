@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import EditableQuestion from "./EditableQuestion";
 
 const QuestionsForm = ({ questions }) => {
-
+  
   const initialValues = {questions}
   
   const router = useRouter();
@@ -34,7 +34,7 @@ const QuestionsForm = ({ questions }) => {
 
         resolve();
 
-        router.push("/");
+        router.reload()
       } catch (error) {
         console.error(error);
 
@@ -77,7 +77,6 @@ const QuestionsForm = ({ questions }) => {
           description: Yup.string()
             .required("Required")
             .max(280, "Must be 280 characters or less"),
-          time: Yup.mixed().oneOf(["30", "60", "120"]),
           validOption: Yup.string().required("Required"),
           options: Yup.array().of(
             Yup.object().shape({
@@ -121,9 +120,9 @@ const QuestionsForm = ({ questions }) => {
   const defaultQuestion = {
     id: uuidv4(),
     description: "",
-    time: "30",
     type: "text",
-    points: 200,
+    category: "playa",
+    difficulty: 'BAJA',
     validOption: defaultValidOption,
     options: [
       {

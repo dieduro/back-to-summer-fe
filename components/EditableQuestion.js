@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Field } from "formik";
 import theme from "../theme.json";
-import {TYPES, SCORES, TIMES, CATEGORIES, DIFFICULTIES} from '../utils/questionFormValues'
+import {TYPES, CATEGORIES, DIFFICULTIES} from '../utils/questionFormValues'
 
 import ImageInput from "./inputs/ImageInput"
 import VideoInput from "./inputs/VideoInput"
@@ -58,6 +58,17 @@ const EditableQuestion = ({
     setFieldValue(`questions.${index}.type`, type)
   }
 
+  const setDifficultyAndScore = (difficulty) => {
+    console.log(difficulty)
+    let score
+    if (difficulty === DIFFICULTIES.BAJA) { score = 200 }
+    else if (difficulty === DIFFICULTIES.MEDIA) { score = 400 }
+    else { score = 800 }
+
+    setFieldValue(`questions.${index}.points`, points)
+    setFieldValue(`questions.${index}.difficulty`, difficulty)
+  }
+
   const onImgUploadCb = url => {
     setQuestionImageUrl(url) 
   }
@@ -111,49 +122,6 @@ const EditableQuestion = ({
             >
               <div className="flex flex-wrap flex-row justify-start w-5/6 mb-4 mx-4">
                 <div className="m-2">
-                  <p className="text-secondary mb-2">Tiempo de respuesta:</p>
-                  <Field
-                    name={`questions.${index}.time`}
-                    as="select"
-                    className="text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    placeholder="Tiempo"
-                    disabled={formProps.isSubmitting}
-                  >
-                    { TIMES.map(time => {
-                      return  <option key={time.value} value={time.value}>{time.copy}</option>
-                    })}
-                  </Field>
-                </div>
-                <div className="m-2">
-                  <p className="text-secondary mb-2">Dificultad:</p>
-                  <Field
-                    name={`questions.${index}.difficulty`}
-                    value={question.difficulty ? question.difficulty : formProps.values.questions[index].difficulty}
-                    as="select"
-                    className="text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    placeholder="Type"
-                    disabled={formProps.isSubmitting}
-                  >
-                    {DIFFICULTIES.map(difficulty => {
-                      return <option key={difficulty.value} value={difficulty.value}>{difficulty.copy}</option>
-                    })}
-                  </Field>
-                </div>
-                <div className="m-2">
-                  <p className="text-secondary mb-2">Puntaje:</p>
-                  <Field
-                    name={`questions.${index}.points`}
-                    as="select"
-                    className="text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    placeholder="Points"
-                    disabled={formProps.isSubmitting}
-                  >
-                    { SCORES.map(score => {
-                      return  <option key={score.value} value={score.value}>{score.copy}</option>
-                    })}
-                  </Field>
-                </div>
-                <div className="m-2">
                   <p className="text-secondary mb-2">Categoría:</p>
                   <Field
                     name={`questions.${index}.category`}
@@ -168,6 +136,23 @@ const EditableQuestion = ({
                     })}
                   </Field>
                 </div>
+                <div className="m-2">
+                  <p className="text-secondary mb-2">Dificultad:</p>
+                  <Field
+                    name={`questions.${index}.difficulty`}
+                    value={question.difficulty ? question.difficulty : formProps.values.questions[index].difficulty}
+                    as="select"
+                    className="text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
+                    placeholder="Type"
+                    disabled={formProps.isSubmitting}
+                    onChange={e => {setDifficultyAndScore(e.target.value)}}
+                  >
+                    {DIFFICULTIES.map(difficulty => {
+                      return <option key={difficulty.value} value={difficulty.value}>{difficulty.copy}</option>
+                    })}
+                  </Field>
+                </div>
+                
                 <div className="m-2">
                   <p className="text-secondary mb-2">Tipo:</p>
                   <Field

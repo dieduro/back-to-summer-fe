@@ -1,5 +1,3 @@
-
-
 export const TYPES = 
 [
     {
@@ -27,8 +25,8 @@ export const SCORES =
         copy: '200 puntos'
     },
     {
-        value: '500',
-        copy: '500 puntos'
+        value: '400',
+        copy: '400 puntos'
     },
     {
         value: '800',
@@ -36,35 +34,19 @@ export const SCORES =
     }
 ]
 
-export const TIMES =
-[
-    {
-        value: 15,
-        copy: '15 segundos'
-    },
-    {
-        value: 30,
-        copy: '30 segundos'
-    },
-    {
-        value: 45,
-        copy: '45 segundos'
-    }
-]
-
 export const DIFFICULTIES =
 [
     {
-        value: 'FACIL',
-        copy: 'Fácil'
+        value: 'BAJA',
+        copy: 'Baja'
     },
     {
-        value: 'INTERMEDIO',
-        copy: 'Intermedio'
+        value: 'MEDIA',
+        copy: 'Media'
     },
     {
-        value: 'DIFICIL',
-        copy: 'Difícil'
+        value: 'ALTA',
+        copy: 'Alta'
     }
 ]
 
@@ -80,7 +62,7 @@ export const CATEGORIES =
         copy: 'Música'
     },
     {
-        value: 'ciencia',
-        copy: 'Ciencia'
+        value: 'marcas',
+        copy: 'Marcas'
     }
 ]
