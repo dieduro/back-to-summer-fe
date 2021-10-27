@@ -116,33 +116,40 @@ const QuestionsForm = ({ questions }) => {
       ),
   });
 
-  const defaultValidOption = uuidv4()
-  const defaultQuestion = {
-    id: uuidv4(),
-    description: "",
-    type: "text",
-    category: "playa",
-    difficulty: 'BAJA',
-    validOption: defaultValidOption,
-    options: [
-      {
-        id: defaultValidOption,
-        content: "",
-      },
-      {
-        id: uuidv4(),
-        content: "",
-      },
-      {
-        id: uuidv4(),
-        content: "",
-      },
-      {
-        id: uuidv4(),
-        content: "",
-      },
-    ],
+  const addNewQuestion = (insert) => {
+  
+    const defaultValidOption = uuidv4()
+    const newQuestion = {
+      id: uuidv4(),
+      description: "",
+      type: "text",
+      category: "playa",
+      difficulty: 'BAJA',
+      validOption: defaultValidOption,
+      options: [
+        {
+          id: defaultValidOption,
+          content: "",
+        },
+        {
+          id: uuidv4(),
+          content: "",
+        },
+        {
+          id: uuidv4(),
+          content: "",
+        },
+        {
+          id: uuidv4(),
+          content: "",
+        },
+      ],
+    }
+
+    insert(0, newQuestion)
   }
+
+  
   return (
     <>
       <Formik
@@ -163,7 +170,7 @@ const QuestionsForm = ({ questions }) => {
                         <Button
                           type="button"
                           disabled={formProps.isSubmitting}
-                          onClick={() => { insert(0, defaultQuestion) }}
+                          onClick={e => {addNewQuestion(insert)}}
                         >
                           Agregar Pregunta
                         </Button>

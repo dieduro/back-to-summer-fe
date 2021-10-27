@@ -44,6 +44,10 @@ const EditableQuestion = ({
 
   useEffect( ()=> {
     height = container1.current.scrollHeight
+
+    if (!question.points) {
+      setFieldValue(`questions.${index}.points`, 200)
+    }
   }, [questionType])
 
 
@@ -60,10 +64,10 @@ const EditableQuestion = ({
 
   const setDifficultyAndScore = (difficulty) => {
     console.log(difficulty)
-    let score
-    if (difficulty === DIFFICULTIES.BAJA) { score = 200 }
-    else if (difficulty === DIFFICULTIES.MEDIA) { score = 400 }
-    else { score = 800 }
+    let points
+    if (difficulty === DIFFICULTIES.BAJA) { points = 200 }
+    else if (difficulty === DIFFICULTIES.MEDIA) { points = 400 }
+    else { points = 800 }
 
     setFieldValue(`questions.${index}.points`, points)
     setFieldValue(`questions.${index}.difficulty`, difficulty)
@@ -171,7 +175,7 @@ const EditableQuestion = ({
                 </div>
               </div>
               { questionType == "image" && <ImageInput uploadCb={onImgUploadCb} index={index} formProps={formProps} value={question.imageUrl}/> }
-              { questionType == "video" && <VideoInput index={index} formProps={formProps} value={question?.video}/> }
+              { questionType == "video" && <VideoInput index={index} formProps={formProps} value={question}/> }
               { questionType == "audio" && <AudioInput uploadCb={onAudioUploadCb} index={index} formProps={formProps} value={question?.audio}/> }
 
               <div className="w-5/6 m-4">
