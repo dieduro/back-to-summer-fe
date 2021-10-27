@@ -1,10 +1,10 @@
+import { useState } from 'react'
 import { Field } from "formik";
 import ErrorMessage from "../ErrorMessage";
 
 const VideoInput = ({ index, formProps, value}) => {
-    const videoUrl   = value ? value.url : ""
-    const videoStart = value? value.start : ""
-    const videoEnd   = value? value.end : ""
+
+    const [video, setVideo] = useState(value.video)
 
     return (
         <>
@@ -15,7 +15,7 @@ const VideoInput = ({ index, formProps, value}) => {
                     name={`questions.${index}.video.url`}
                     type="text"
                     className="text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    value={videoUrl}
+                    value={video.url}
                     touched={formProps.touched[`questions.${index}.video.url`]}
                     onBlur={formProps.handleBlur}
                 />
@@ -26,7 +26,7 @@ const VideoInput = ({ index, formProps, value}) => {
                     name={`questions.${index}.video.start`}
                     type="text"
                     className="w-4/5 text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    value={videoStart}
+                    value={video.start}
                     touched={formProps.touched[`questions.${index}.video.start`]}
                     onBlur={formProps.handleBlur}
                 />
@@ -37,7 +37,7 @@ const VideoInput = ({ index, formProps, value}) => {
                     name={`questions.${index}.video.end`}
                     type="text"
                     className="w-4/5 text-secondary border-2 px-1 py-2 focus:outline-none focus:ring mb-1 disabled:opacity-50 bg-white"
-                    value={videoEnd}
+                    value={video.end}
                     touched={formProps.touched[`questions.${index}.video.end`]}
                     onBlur={formProps.handleBlur}
                 />

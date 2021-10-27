@@ -37,3 +37,4 @@ yarn-error.log*
 .githubtoken.txt
 .back-to-summer-dev-firebase.js
 .back-to-summer-firebase-adminsdk-utife-7432f1770b.json
+.back-to-summer-prod.json

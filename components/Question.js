@@ -65,7 +65,6 @@ export default function Question({ data, onBackCb }) {
     }
   
     const currentQuestion = data;
-    console.log(44, currentQuestion)
   
     return (
       <div className="flex flex-col justify-between h-[100vh]">
