@@ -22,6 +22,7 @@ const EditableQuestion = ({
   const [selected, setSelected] = useState(null);
   const [questionType, setQuestionType] = useState(question.type)
   const [questionImageUrl, setQuestionImageUrl] = useState(question.imageUrl);
+  const [questionVideoUrl, setQuestionVideoUrl] = useState(question.videoUrl);
   const [questionAudioUrl, setQuestionAudioUrl] = useState(question.audioUrl);
   
   const container1 = useRef(null);
@@ -34,6 +35,13 @@ const EditableQuestion = ({
       questionImageUrl
     )
   }, [questionImageUrl])
+
+  useEffect(() => {
+    setFieldValue(
+      `questions.${index}.videoUrl`,
+      questionVideoUrl
+    )
+  }, [questionVideoUrl])
 
   useEffect(() => {
     setFieldValue(
@@ -75,6 +83,10 @@ const EditableQuestion = ({
 
   const onImgUploadCb = url => {
     setQuestionImageUrl(url) 
+  }
+
+  const onVideoUploadCb = url => {
+    setQuestionVideoUrl(url) 
   }
 
   const onAudioUploadCb = url => {
@@ -175,7 +187,7 @@ const EditableQuestion = ({
                 </div>
               </div>
               { questionType == "image" && <ImageInput uploadCb={onImgUploadCb} index={index} formProps={formProps} value={question.imageUrl}/> }
-              { questionType == "video" && <VideoInput index={index} formProps={formProps} value={question}/> }
+              { questionType == "video" && <VideoInput uploadCb={onVideoUploadCb} index={index} formProps={formProps} value={question}/> }
               { questionType == "audio" && <AudioInput uploadCb={onAudioUploadCb} index={index} formProps={formProps} value={question?.audio}/> }
 
               <div className="w-5/6 m-4">

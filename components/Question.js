@@ -8,10 +8,9 @@ import { TYPES } from "../utils/questionFormValues"
 import Countdown from "./Countdown";
 import CheckCircle from "../icons/CheckCircle";
 import XCircle from "../icons/XCircle";
-import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 
-export default function Question({ data, onBackCb }) {
+export default function Question({ data }) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [score, setScore] = useState(null);
     const [timeUsed, setTimeUsed] = useState(null);
@@ -69,10 +68,10 @@ export default function Question({ data, onBackCb }) {
     return (
       <div className="flex flex-col justify-between h-[100vh]">
         <div className="w-[100px] h-[100px] mr-0 ml-auto">
-          <Countdown time={currentQuestion.time} shouldRun={!answered} onFinish={onTimerEnded} onTimerStop={setTimeUsed}/>
+          <Countdown time={20} shouldRun={!answered} onFinish={onTimerEnded} onTimerStop={setTimeUsed}/>
         </div>
         <div className="mb-4 mx-auto w-full">
-          <Heading color="dark">{currentQuestion.description}</Heading>
+          <Heading color="white">{currentQuestion.description}</Heading>
           <div className="relative p-2 m-2 w-full sm:w-3/5 h-full mx-auto ">
             { currentQuestion.type == 'image' && currentQuestion.imageUrl &&
                     <Image 
@@ -85,8 +84,8 @@ export default function Question({ data, onBackCb }) {
                     /> 
             }
             {
-              currentQuestion.type == 'video' && currentQuestion.video.url &&
-              <VideoEmbed url={currentQuestion.video.url}/>
+              currentQuestion.type == 'video' && currentQuestion.videoUrl &&
+              <VideoEmbed url={currentQuestion.videoUrl}/>
             }
             {
               currentQuestion.type == 'audio' && currentQuestion.audioUrl &&
@@ -107,9 +106,6 @@ export default function Question({ data, onBackCb }) {
                 onClick={e =>{ onQuestionAnswered(option)}}
                 disabled={!!selectedOption}
               >
-                <span className="mr-2 py-4 px-4 h-12 md:h-16 bg-white text-secondary font-bold text-xl md:text-2xl rounded">
-                  {index + 1}
-                </span>
                 <div
                   className={classnames([
                     "flex justify-between items-center w-full h-12 md:h-16 px-4 py-2 bg-white border text-secondary text-xl text-left rounded",
@@ -135,18 +131,6 @@ export default function Question({ data, onBackCb }) {
           ))}
         </ul>
         <div className="w-[75vw] h-[10vh] flex justify-items-center self-center">
-          <Button onClick={() => {onBackCb(answered)}}>Back</Button>
-          {/* {!answered && (
-            <div className="w-3/4 mx-auto bottom-[-5]">
-              <ProgressBar
-                time={currentQuestion.time}
-                onStart={() => {
-                  // toggleBackground();
-                }}
-                onFinish={}
-              />
-            </div>
-          )} */}
         </div>
       </div>
     );

@@ -27,10 +27,30 @@ module.exports = {
         primary: theme.colors.primary,
         secondary: theme.colors.secondary,
         alternate: theme.colors.alternate,
+        orange: theme.colors.orange,
+        yellow: theme.colors.yellow,
+        red: theme.colors.red,
+        ocher: theme.colors.ocher,
         white: theme.colors.white,
         dark: theme.colors.dark,
         gray: theme.colors.gray,
         error: theme.colors.error,
+      },
+      backgroundImage: {
+        'gradient-radial-tr': 'radial-gradient(circle at top right, var(--tw-gradient-stops))',
+        'gradient-radial-br': 'radial-gradient(circle at bottom right, var(--tw-gradient-stops))',
+        'multiple-gradients': 'radial-gradient(circle at top right, var(--tw-gradient-stops)) radial-gradient(circle at bottom right, var(--tw-gradient-stops))'
+      },
+      fontFamily: {
+        sans: [
+          '-apple-system',
+          'Roboto',
+          'Helvetica Neue',
+          'sans-serif',
+        ],
+        blenny: [
+          'Blenny'
+        ]
       },
       keyframes: {
         timebar: {

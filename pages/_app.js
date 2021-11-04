@@ -1,5 +1,6 @@
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
+import '../styles/fonts.css';
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { AuthProvider } from "../lib/auth";

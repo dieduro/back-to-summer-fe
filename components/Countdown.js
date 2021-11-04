@@ -12,13 +12,11 @@ const Countdown = ({ time, onFinish, onStart, onTimerStop, shouldRun, ...props})
         isRunning,
         start,
         pause,
-        resume,
-        restart,
       } = useTimer({ expiryTimestamp, onExpire: () => onFinish });
     
     const radius = 50
     const progress = 50
-    const constainerClassNames = `flex relative mt-2 mx-auto w-full h-[${radius * 2}px]`
+    const containerClassNames = `flex relative mt-2 mx-auto w-full h-[${radius * 2}px]`
 
     useEffect(() => {
         if (shouldRun) {

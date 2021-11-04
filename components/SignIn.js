@@ -18,9 +18,6 @@ export default function SignIn({ onResetPass }) {
           if (response.error) {
             setMessage(response.message);
           }
-          else {
-            router.push('/trivia')
-          }
         });
 
       } catch (error) {

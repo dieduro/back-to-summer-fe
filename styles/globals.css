@@ -29,6 +29,15 @@
   } 
 }
 
+.gradient-background {
+  background:
+      linear-gradient(#F78100, transparent),
+      linear-gradient(to top left, #F9EC00, #F78100, transparent),
+      linear-gradient(to bottom left, #f43434, transparent);
+  background-blend-mode: hard-light;
+  opacity: 0.85;
+}
+
 .debug * {
   box-shadow: 0 0 1px red;
 }

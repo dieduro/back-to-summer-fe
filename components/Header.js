@@ -15,23 +15,21 @@ const Header = () => {
     return <></>
   } else {
     return (
-        <header className="lg:w-4/5 w-full mx-auto h-[10vh]">
-          <div className="container mx-auto w-full">
-            <div className="h-12 w-28 lg:w-40 p-2 mt-2">
-              <Link href="/">
-                <>
-                  <Image
-                    width={80}
-                    height={27}
-                    src="/logo.png"
-                    layout="responsive"
-                    alt="Logo"
-                  />
-                  </>
-              </Link>
-              <div className="flex">{user && <UserMenu />}</div>
-            </div>
+        <header className="flex justify-between lg:w-4/5 w-full mx-auto h-[10vh]">
+          <div className="container mx-4 h-12 w-28 lg:w-40 p-2 mt-2">
+          { !user &&
+            <Link href="/">
+                <Image
+                  width={80}
+                  height={27}
+                  src="/logo.png"
+                  layout="responsive"
+                  alt="Logo"
+                />
+            </Link>
+          }
           </div>
+          <div className="flex items-center">{user && <UserMenu />}</div>
         </header>
     );
   } 

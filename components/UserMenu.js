@@ -7,26 +7,24 @@ const UserMenu = () => {
     const { user, signout } = useAuth();
   
     return (
-      <div className="relative inline-block">
-        <div>
-          <span className="shadow-sm">
-            <button
-              type="button"
-              className="text-secondary flex items-center w-full border px-4 py-2 focus:outline-none focus:ring-blue transition ease-in-out duration-150"
-              id="options-menu"
-              aria-haspopup="true"
-              aria-expanded="true"
-              onClick={() => {
-                setIsOpen(!isOpen);
-              }}
-            >
-              {user.name}
-              <ChevronRight className="h-6 ml-4" />
-            </button>
-          </span>
-        </div>
+      <div className="relative inline-block h-12">
+        <span className="shadow-sm">
+          <button
+            type="button"
+            className="text-white flex items-center w-full py-2 focus:outline-none focus:ring-blue transition ease-in-out duration-150"
+            id="options-menu"
+            aria-haspopup="true"
+            aria-expanded="true"
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            {user.name}
+            <ChevronRight className="h-6 ml-4" />
+          </button>
+        </span>
         {isOpen && (
-          <div className="origin-top-right absolute right-0 mt-1 w-56">
+          <div className="origin-top-left absolute right-0 mt-1 w-3/4">
             <div className="bg-white border">
               <div
                 className="px-4 py-2"

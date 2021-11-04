@@ -23,7 +23,6 @@ const QuestionsForm = ({ questions }) => {
 
   const onSubmit = async (values) => {
     setMessage("Processing...");
-    parseYouTubeUrl(values.questions)
     
     console.log(22, values)
     return new Promise(async (resolve, reject) => {

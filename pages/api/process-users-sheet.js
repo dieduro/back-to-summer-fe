@@ -1,43 +1,24 @@
 import { read } from "../../lib/sheetReader"
 import admin from "../../lib/firebase-admin"
+import {signUpWithEmailAndPass} from "../../lib/apiAuth.js";
 import { v4 as uuidv4 } from "uuid";
-import { createUser } from "../../lib/db";
-import bcrypt from 'bcrypt'
+//import { createUser } from "../../lib/db";
 
 const getAuthDataAndStore = async () => {
-  const url = process.env.NEXT_PUBLIC_USERS_SHEEET_URL
-  let formattedUsers = []
+  const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRb3nv2wyvZFVITIkKv9YqUEFhCsC4HIEWVh2LASr1tfUKJeHSBLt74Q4-NPNSf5A/pub?gid=1194016082&single=true&output=csv"//rocess.env.NEXT_PUBLIC_USERS_SHEEET_URL
+  let usersCreated = 0
 
   await read(url).then(async (users) => {
     await  users.map(async (user) => {
-        console.log(123, user.password)
-        // generate salt to hash password
-        const salt = await bcrypt.genSalt(10);
-        // now we set user password to hashed password
-        user.password = await bcrypt.hash(user.password, salt);
-        formattedUsers.push(
-          {
-            uid: user.password,
-            email: user.user,
-            passwordHash: Buffer.from(user.password),
-            name: user.name
-          }
-        );
-        console.log(345)
-    })
-    console.log(888, formattedUsers)
-    return formattedUsers
+      const name = `${user.NOMBRE} ${user.APELLIDO}`
+      await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name})
+      .then((response) => {
+          if(response) { usersCreated++}
+      })
   })
-  
+})
+  return usersCreated 
 };
-
-// hash_config {
-  // algorithm: SCRYPT,
-  // base64_signer_key: GEh1fsq1P2lXzJlA4mQKMM9RcwzvaMq9sKXYLaECMv4AorxM4B2dc4E7/g00Nh1sWCJcomDfX2QXqceaTNxHCw==,
-  // base64_salt_separator: Bw==,
-  // rounds: 8,
-  // mem_cost: 14,
-// }
 
 const importUsers = async (userImportRecords) => {
   admin.auth()
@@ -79,13 +60,8 @@ const createUsersCollection = async (users) => {
 }
 
 export default async function handler2(req, res) {
-    console.log("PROCESS SHEET")
-    const usersPromise = new Promise((resolve, reject) => {
-      const users = getAuthDataAndStore()
-      resolve(users)
-    })
-    usersPromise.then(users => {console.log(222, users)})
-    
-    //importUsers(users)
-    res.status(200).json({ name: 'John Doe' })
+    console.log("PROCESS SHEET CHURURUELE")
+    const users = await getAuthDataAndStore()
+    console.log("USERS CREATED", users)
+    res.status(200).json('Users created: ', users)
   }
