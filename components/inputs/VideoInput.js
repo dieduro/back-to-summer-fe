@@ -9,25 +9,23 @@ import theme from "../../theme.json";
 const VideoCustomInput = ({value, uploadingVideo, loaderColor, videoSrc, ...props}) => {
     console.log(789, videoSrc)
     const src = value?.videoUrl ? value.videoUrl : videoSrc
-    console.log(234, src)
     return (
         <>
-           
-                <div className="flex justify-center items-center h-[220px] w-[300px] bg-white">
-                    { uploadingVideo ? 
-                        <Loader
-                        type="Oval"
-                        color={loaderColor}
-                        height={43}
-                        width={40}
-                    />
-                    : !src ? <img src="/upload.png" className="w-16 h-16" alt="Botón carga de video"/> : 
-                        
-                        <video src={src} controls>
-                            Tu navegador no admite el elemento <code>video</code>.
-                        </video>  
-                    }
-                </div>
+            <div className="flex justify-center items-center h-[220px] w-[300px] bg-white">
+                { uploadingVideo ? 
+                    <Loader
+                    type="Oval"
+                    color={loaderColor}
+                    height={43}
+                    width={40}
+                />
+                : !src ? <img src="/upload.png" className="w-16 h-16" alt="Botón carga de video"/> : 
+                    
+                    <video src={src} controls>
+                        Tu navegador no admite el elemento <code>video</code>.
+                    </video>  
+                }
+            </div>
             <Button><label htmlFor="pic" className="text-secondary cursor-pointer">{src ? 'Subir Otro Video': 'Subir Video'}</label></Button>
             <input type="file" id="pic" {...props}/>
         </>
