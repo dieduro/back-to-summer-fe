@@ -25,6 +25,7 @@ export default function Index({ trivia }) {
     );
   } 
   else if (user) { 
+    {console.log(66, process.env.NEXT_PUBLIC_USERS_SHEEET_URL)}
     return <Home trivia={trivia} />
   }
   else {
