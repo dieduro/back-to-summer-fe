@@ -1,5 +1,4 @@
 import { read } from "../../lib/sheetReader"
-import admin from "../../lib/firebase-admin"
 import {signUpWithEmailAndPass} from "../../lib/apiAuth.js";
 
 const getAuthDataAndStore = async () => {
@@ -18,20 +17,9 @@ const getAuthDataAndStore = async () => {
   return usersCreated 
 };
 
-// const createUsersCollection = async (users) => {
-//   users.map(async (user) => {
-//     console.log(111,user)
-//     await createUser(user.uid, {
-//       email: user.email,
-//       emailVerified: false,
-//       displayName: user.name,
-//       disabled: false,
-//     })
-//   })
-// }
-
 export default async function handler(req, res) {
-    const users = await getAuthDataAndStore()
-    console.log("USERS CREATED")
-    res.status(200).json('Users created: ', users)
-  }
+  const users = await getAuthDataAndStore()
+  console.log("USERS CREATED")
+  console.log(222, res)
+  res.status(200).json('Users created: ', users)
+}
