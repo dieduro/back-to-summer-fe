@@ -32,6 +32,6 @@ const getAuthDataAndStore = async () => {
 
 export default async function handler(req, res) {
     const users = await getAuthDataAndStore()
-    console.log("USERS CREATED", users)
+    console.log("USERS CREATED")
     res.status(200).json('Users created: ', users)
   }

@@ -7,7 +7,6 @@ import Button from "../../ui/Button";
 import theme from "../../theme.json";
 
 const VideoCustomInput = ({value, uploadingVideo, loaderColor, videoSrc, ...props}) => {
-    console.log(789, videoSrc)
     const src = value?.videoUrl ? value.videoUrl : videoSrc
     return (
         <>
@@ -43,7 +42,6 @@ const VideoInput = ({uploadCb, index, formProps, value}) => {
     }, [videoSrc])
 
     const onVideoUpload = async (file) => {
-        console.log(789, file)
         setUploadingVideo(true)
         return new Promise(async (resolve, reject) => {
             try {

@@ -23,12 +23,10 @@ export default function Index({ trivia }) {
       </div>
     );
   } 
-  else if (user) { 
-    {console.log(66, process.env.NEXT_PUBLIC_USERS_SHEEET_URL)}
+  else if (user) {
     return <Home trivia={trivia} />
   }
   else {
-    {console.log(66, process.env.NEXT_PUBLIC_USERS_SHEEET_URL)}
     return <Login />;
   }
 }
