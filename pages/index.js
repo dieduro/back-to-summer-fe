@@ -11,7 +11,6 @@ export default function Index({ trivia }) {
 
   const { user } = useAuth();
   const colors = theme.colors;
-  console.log(88, user)
 
   useEffect(() => {
     const user = localStorage.getItem("auth")
@@ -29,6 +28,7 @@ export default function Index({ trivia }) {
     return <Home trivia={trivia} />
   }
   else {
+    {console.log(66, process.env.NEXT_PUBLIC_USERS_SHEEET_URL)}
     return <Login />;
   }
 }
