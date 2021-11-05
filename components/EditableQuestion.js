@@ -71,7 +71,6 @@ const EditableQuestion = ({
   }
 
   const setDifficultyAndScore = (difficulty) => {
-    console.log(difficulty)
     let points
     if (difficulty === DIFFICULTIES.BAJA) { points = 200 }
     else if (difficulty === DIFFICULTIES.MEDIA) { points = 400 }
