@@ -10,8 +10,18 @@ export default async function handler(req, res) {
         })
     })
     await deleteUsers(userIds).then(response => {
-        res.status(200).json("DELETED")
+        console.log(response.users.length)
     })
+    console.log(456, res.statusCode)
+    if (res.statusCode == 200) {
+        return res.status(200).json({
+            message: "Users deleted successfully"
+        });
+    } else {
+        return res.status(500).json({
+            message: 'que habra fallado aca viejo!?',
+        });
+    }
         
   }
   

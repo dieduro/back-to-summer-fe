@@ -10,16 +10,22 @@ const getAuthDataAndStore = async () => {
       const name = `${user.NOMBRE} ${user.APELLIDO}`
       await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name})
       .then((response) => {
+        console.log(99, response.email)
           if(response) { usersCreated++}
       })
   })
+  return users
 })
-  return usersCreated 
 };
 
 export default async function handler(req, res) {
   const users = await getAuthDataAndStore()
   console.log("USERS CREATED")
-  console.log(222, res)
-  res.status(200).json('Users created: ', users)
+  if (res.statusCode == 200) {
+    return res.status(200).json(users);
+  } else {
+    return res.status(500).json({
+      message: 'Error 500 - H',
+    });
+  }
 }
