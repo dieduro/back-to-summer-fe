@@ -10,11 +10,11 @@ const Footer = () => {
     return <></>
   } else {
     return (
-      <footer className="w-full absolut bottom-0 mx-auto py-4 h-[7vh] ">
+      <footer className="absolute bottom-0 w-full mx-auto py-4 ">
         <div className="w-max mx-auto">
-          <span className="text-secondary mr-2">Coded with</span>
+          <span className="text-gray mr-2">Coded with</span>
           <Emoji symbol="❤️" label="heart" />
-          <span className="text-secondary ml-2">by DieDuro</span>
+          <span className="text-gray ml-2">by DieDuro</span>
         </div>
       </footer>
     );

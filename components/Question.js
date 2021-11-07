@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from 'next/image'
+import Router from "next/router";
 import classnames from "classnames";
 import VideoEmbed from "./VideoEmbed";
 import useAudio from "../hooks/useAudio";
@@ -10,7 +11,7 @@ import CheckCircle from "../icons/CheckCircle";
 import XCircle from "../icons/XCircle";
 import Heading from "../ui/Heading";
 
-export default function Question({ data }) {
+export default function Question({ data, questionAnsweredCb }) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [score, setScore] = useState(null);
     const [timeUsed, setTimeUsed] = useState(null);
@@ -61,6 +62,8 @@ export default function Question({ data }) {
       } else {
         playError();
       }
+
+      setTimeout(() => { questionAnsweredCb() }, 2000);
     }
   
     const currentQuestion = data;
@@ -71,8 +74,8 @@ export default function Question({ data }) {
           <Countdown time={20} shouldRun={!answered} onFinish={onTimerEnded} onTimerStop={setTimeUsed}/>
         </div>
         <div className="mb-4 mx-auto w-full">
-          <Heading color="white">{currentQuestion.description}</Heading>
-          <div className="relative p-2 m-2 w-full sm:w-3/5 h-full mx-auto ">
+          <Heading className="text-3xl" color="white">{currentQuestion.description}</Heading>
+          <div className="relative p-2 m-2 w-full sm:w-3/5 h-80 mx-auto ">
             { currentQuestion.type == 'image' && currentQuestion.imageUrl &&
                     <Image 
                       src={currentQuestion.imageUrl}

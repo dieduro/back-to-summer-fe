@@ -43,11 +43,19 @@ const Game = ({ trivia }) => {
     setQuestion(data)
   }
 
+  const onBackFromQuestion = () => {
+    setQuestion(question => {
+      console.log(44, question)
+      console.log(55, trivia)
+      return null
+    })
+  }
+
   return (
     <>
       <div className="flex flex-col w-[100vw] mx-auto h-screen">
           {question ? (
-            <Question data={question}/>
+            <Question data={question} questionAnsweredCb={onBackFromQuestion}/>
           ) : (
             <div className="flex flex-col mx-auto mt-2 self-center w-[100vw] h-auto">
               <Heading className="font-blenny text-6xl text-shadow">

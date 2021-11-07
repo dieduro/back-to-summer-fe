@@ -39,7 +39,8 @@ module.exports = {
       backgroundImage: {
         'gradient-radial-tr': 'radial-gradient(circle at top right, var(--tw-gradient-stops))',
         'gradient-radial-br': 'radial-gradient(circle at bottom right, var(--tw-gradient-stops))',
-        'multiple-gradients': 'radial-gradient(circle at top right, var(--tw-gradient-stops)) radial-gradient(circle at bottom right, var(--tw-gradient-stops))'
+        'multiple-gradients': 'radial-gradient(circle at top right, var(--tw-gradient-stops)) radial-gradient(circle at bottom right, var(--tw-gradient-stops))',
+        'sea': 'url(/sea-bg.jpeg)'
       },
       fontFamily: {
         sans: [

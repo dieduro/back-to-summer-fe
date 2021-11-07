@@ -17,7 +17,7 @@ const Header = () => {
     return (
         <header className="flex justify-between lg:w-4/5 w-full mx-auto h-[10vh]">
           <div className="container mx-4 h-12 w-28 lg:w-40 p-2 mt-2">
-          { !user &&
+          {/* { !user &&
             <Link href="/">
                 <Image
                   width={80}
@@ -27,7 +27,7 @@ const Header = () => {
                   alt="Logo"
                 />
             </Link>
-          }
+          } */}
           </div>
           <div className="flex items-center">{user && <UserMenu />}</div>
         </header>

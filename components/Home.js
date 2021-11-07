@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link'
 import Router from "next/router";
+import Image from "next/image"
 import { useAuth } from "../lib/auth.js";
 import { updateUser } from "../lib/db";
+import Login from "../components/Login";
 import Button from "../ui/Button";
 import Heading from "../ui/Heading.js";
 
@@ -13,6 +15,7 @@ const Home = ({ trivia}) => {
   
   let content = {};
   if (user) {
+
     if (user.status == "finished") {
       content = {
         title: "¡Gracias por haber completado la TribiTrivia!",
@@ -23,6 +26,7 @@ const Home = ({ trivia}) => {
       };
     } else {
       if (gameState != "play" && trivia) {
+        console.log(user)
         content = {
           title: `Hola ${user.name}!`,
           buttonText: "Jugar"
@@ -52,38 +56,47 @@ const Home = ({ trivia}) => {
   };
 
   return (
-    <div className="flex flex-col w-[100vw] mx-auto max-h-screen">
-      <div className="mx-auto my-4">
-        <Heading className="font-blenny text-6xl text-shadow">
+    <div className="flex flex-col justify-around mx-auto my-4 lg:w-2/3 md:w-4/5 max-h-screen">
+        <Heading className="font-blenny text-4xl md:text-6xl text-shadow">
           back to <br/> summer
         </Heading>
-        <h3 className="font-sans text-white text-center text-3xl lg:text-4xl">{homeContent?.title}</h3>
-        <div className="flex flex-col justify-between w-4/5 md:w-3/5 h-80 mx-auto mt-8">
-          <div><p className="text-white text-xl lg:text-2xl">
-            La playa te reúne,
-            la música te reconecta,
-            las marcas se relacionan
-          </p></div>
-          <ul className="flex justify-between">
-            <li>
-              <h3 className="text-white">Mediakit</h3>
-
+        {
+          user ? 
+            <h3 className="font-sans m-4 text-white text-center text-3xl lg:text-4xl">{ `Hola ${user.name}!`}</h3>
+            : <Login />
+        }
+        
+        <div className="flex flex-col justify-between w-4/5 lg:w-3/4 h-auto mx-auto my-4">
+          <p className="flex flex-col justify-between w-full mx-auto my-4 text-white text-xl lg:text-3xl italic">
+            <span className="mx-auto">La playa te reúne,</span>
+            <span className="mx-auto">la música te reconecta,</span>
+            <span className="mx-auto">las marcas se relacionan</span>
+          </p>
+          <ul className="flex justify-between my-4">
+            <li className="w-16 md:w-28">
+              <Image src="/mediakit.png" width={80} height={80} layout="responsive" />
+              <h3 className="mt-2 text-center text-white text-xl">Mediakit</h3>
             </li>
-            <li>
-            <h3 className="text-white">Ranking</h3>
+            <li className="w-16 md:w-28">
+              <Image src="/ranking.png" width={80} height={80} layout="responsive" />
+              <h3 className="mt-2 text-center text-white text-xl">Ranking</h3>
             </li>
-            <li>
-            <h3 className="text-white">Reglas</h3>
+            <li className="w-16 md:w-28">
+              <Image src="/reglas.png" width={80} height={80} layout="responsive" />
+              <h3 className="mt-2 text-center text-white text-xl">Reglas</h3>
             </li>
           </ul>
-          <Link href="/trivia">
+          { user &&
+          <div className="relative flex justify-center mt-8"> 
             <Button>
-              {homeContent?.buttonText}
+              <Link href="/trivia">
+                Jugar
+              </Link>
             </Button>
-          </Link>
+            </div>
+          }
         </div>
       </div>
-    </div>
   );
 };
 
