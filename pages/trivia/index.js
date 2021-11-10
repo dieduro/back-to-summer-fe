@@ -9,12 +9,13 @@ export default function Trivia({ trivia }) {
   const router   = useRouter();  
   useEffect(() => {
       const localStoredUser = localStorage.getItem('auth')
-      if (!localStoredUser) {
+      if (!localStoredUser || user) {
         router.push("/");
       }
-  }, [user])
-
-  return <Game trivia={trivia} />
+  }, [])
+  
+  if (user) { <Game trivia={trivia} /> }
+  return <></>
 }
 
 export async function getStaticProps(context) {
