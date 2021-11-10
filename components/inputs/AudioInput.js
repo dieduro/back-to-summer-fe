@@ -69,7 +69,6 @@ const AudioInput = ({uploadCb, index, formProps, value}) => {
         let file = e.target.files[0];
         if (file) {
             reader.onloadend = () => {
-                console.log(reader.result)
                 setAudioSrc(reader.result)
             }
     

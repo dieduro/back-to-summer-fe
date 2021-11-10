@@ -29,13 +29,21 @@
   } 
 }
 
-.gradient-background {
+.gradient-background-60 {
   background:
       linear-gradient(#F78100, transparent),
       linear-gradient(to top left, #F9EC00, #F78100, transparent),
       linear-gradient(to bottom left, #f43434, transparent);
   background-blend-mode: hard-light;
   opacity: 0.6;
+}
+
+.gradient-background {
+  background:
+      linear-gradient(#F78100, transparent),
+      linear-gradient(to top left, #F9EC00, #F78100, transparent),
+      linear-gradient(to bottom left, #f43434, transparent);
+  background-blend-mode: hard-light;
 }
 
 .debug * {

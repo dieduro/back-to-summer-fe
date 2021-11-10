@@ -26,7 +26,6 @@ const Home = ({ trivia}) => {
       };
     } else {
       if (gameState != "play" && trivia) {
-        console.log(user)
         content = {
           title: `Hola ${user.name}!`,
           buttonText: "Jugar"
@@ -56,34 +55,43 @@ const Home = ({ trivia}) => {
   };
 
   return (
-    <div className="flex flex-col justify-around mx-auto my-4 lg:w-2/3 md:w-4/5 max-h-screen">
-        <Heading className="font-blenny text-4xl md:text-6xl text-shadow">
-          back to <br/> summer
-        </Heading>
-        {
-          user ? 
-            <h3 className="font-sans m-4 text-white text-center text-3xl lg:text-4xl">{ `Hola ${user.name}!`}</h3>
-            : <Login />
-        }
+    <div className="flex flex-col justify-around mx-auto mt-8 lg:w-2/3 md:w-4/5 max-h-screen">
         
-        <div className="flex flex-col justify-between w-4/5 lg:w-3/4 h-auto mx-auto my-4">
-          <p className="flex flex-col justify-between w-full mx-auto my-4 text-white text-xl lg:text-3xl italic">
+        { user && 
+            <h3 className="font-helvetica m-4 text-white text-center text-3xl lg:text-4xl font-medium">{ `Hola ${user.name}!`}</h3>
+        }
+        <div className="relative h-auto">
+          <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
+            back to summer
+          </h1>
+        </div>
+
+        { !user && <Login /> }
+        
+        <div className="flex flex-col justify-between w-4/5 lg:w-3/4 xl:w1/2 mx-auto">
+          <p className="flex flex-col justify-between w-full mx-auto my-6 text-white text-2xl lg:text-3xl font-helvetica italic">
             <span className="mx-auto">La playa te reúne,</span>
             <span className="mx-auto">la música te reconecta,</span>
             <span className="mx-auto">las marcas se relacionan</span>
           </p>
-          <ul className="flex justify-between my-4">
+          <ul className="flex justify-between my-6">
             <li className="w-16 md:w-28">
-              <Image src="/mediakit.png" width={80} height={80} layout="responsive" />
-              <h3 className="mt-2 text-center text-white text-xl">Mediakit</h3>
+              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
+                <Image src="/mediakit.png" width={80} height={80} />
+              </div>
+                <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Mediakit</h3>
             </li>
             <li className="w-16 md:w-28">
-              <Image src="/ranking.png" width={80} height={80} layout="responsive" />
-              <h3 className="mt-2 text-center text-white text-xl">Ranking</h3>
+              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
+                <Image src="/ranking.png" width={80} height={80} />
+              </div>
+              <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Ranking</h3>
             </li>
             <li className="w-16 md:w-28">
-              <Image src="/reglas.png" width={80} height={80} layout="responsive" />
-              <h3 className="mt-2 text-center text-white text-xl">Reglas</h3>
+              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
+                <Image src="/reglas.png" width={80} height={80} />
+              </div>
+              <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Reglas</h3>
             </li>
           </ul>
           { user &&

@@ -8,7 +8,7 @@ export default function SignIn({ onResetPass }) {
   const [message, setMessage] = useState("");
 
   const onSubmit = async (values) => {
-    setMessage("Processing...");
+    setMessage("Procesando...");
 
     return new Promise(async (reject) => {
       try {
@@ -51,7 +51,7 @@ export default function SignIn({ onResetPass }) {
         name="email"
         type="text"
         placeholder="Email"
-        className="w-full text-left text-secondary border-2 mb-4 px-4 py-2 h-10 md:h-12  focus:outline-none focus:ring disabled:opacity-50 bg-white"
+        className="w-full text-left text-secondary rounded-full mb-4 px-4 py-2 h-10 md:h-12  focus:outline-none focus:ring disabled:opacity-50 bg-white"
         onChange={formik.handleChange}
         value={formik.values.email}
       />
@@ -60,15 +60,15 @@ export default function SignIn({ onResetPass }) {
         name="pass"
         type="password"
         placeholder="Password"
-        className="w-full text-left text-secondary border-2 mb-4 px-4 py-2 h-10 md:h-12 focus:outline-none focus:ring disabled:opacity-50 bg-white"
+        className="w-full text-left text-secondary rounded-full mb-4 px-4 py-2 h-10 md:h-12 focus:outline-none focus:ring disabled:opacity-50 bg-white"
         onChange={formik.handleChange}
         value={formik.values.password}
       />
       {message && (
-        <p className="h-12 text-white text-sm text-center">{message}</p>
+        <p className="h-12 text-secondary text-md text-bold text-center">{message}</p>
       )}
       {/* <button onClick={onRecoverPassword}>Olvidé mi contraseña</button> */}
-      <Button type="submit">Sign In</Button>
+      <Button type="submit">Iniciar Sesión</Button>
     </form>
   );
 }

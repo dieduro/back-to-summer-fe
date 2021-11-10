@@ -4,11 +4,12 @@ import '../styles/fonts.css';
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { AuthProvider } from "../lib/auth";
+import { TriviaContextProvider } from "../contexts/TriviaContext";
 
 const App = ({ Component, pageProps }) => {
   return (
     <>
-      {/* <Head>
+      <Head>
         <link
           rel="shortcut icon"
           href="favicon/favicon.ico"
@@ -33,7 +34,7 @@ const App = ({ Component, pageProps }) => {
         />
         <link rel="manifest" href="favicon/site.webmanifest"></link>
         <link rel="canonical" href="" />
-        <title> Trivia </title>
+        <title> Back To Summer </title>
         <meta name="title" content="Trivia" />
         <meta
           name="description"
@@ -59,11 +60,13 @@ const App = ({ Component, pageProps }) => {
           name="viewport"
           content="width=device-width,initial-scale=1,maximum-scale=5"
         />
-      </Head> */}
+      </Head>
       <AuthProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <TriviaContextProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </TriviaContextProvider>
       </AuthProvider>
     </>
   );

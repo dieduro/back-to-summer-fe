@@ -51,7 +51,13 @@ module.exports = {
         ],
         blenny: [
           'Blenny'
-        ]
+        ],
+        helvetica: [
+          'Helvetica Neue',
+          'Helvetica',
+          'Arial',
+          'sans-serif',
+        ],
       },
       keyframes: {
         timebar: {
@@ -66,8 +72,10 @@ module.exports = {
     textColor: {
       primary: theme.colors.primary,
       white: theme.colors.white,
+      black: theme.colors.black,
       secondary: theme.colors.dark,
       error: theme.colors.error,
+      red: theme.colors.red,
     },
   },
   variants: {
