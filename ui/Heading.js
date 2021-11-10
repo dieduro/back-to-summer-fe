@@ -37,7 +37,7 @@ const Heading = ({
       className={classnames([
         "p-2",
         "m-2",
-        "font-bold",
+        "align-middle",
         alignment[align],
         textColor[color],
         ...classNamesArr

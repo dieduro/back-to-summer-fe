@@ -18,17 +18,12 @@ export default function Index({ trivia }) {
 
   if (user == null) {
     return (
-      <div className="content-center mx-auto w-auto mt-28">
+      <div className="content-center mx-auto w-28 mt-28">
         <Circles width="110" height="120" color={colors.white} />
       </div>
     );
   } 
-  else if (user) {
-    return <Home trivia={trivia} />
-  }
-  else {
-    return <Login />;
-  }
+  return <Home trivia={trivia} />
 }
 
 export async function getServerSideProps(context) {

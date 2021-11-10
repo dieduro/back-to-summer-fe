@@ -165,7 +165,7 @@ const QuestionsForm = ({ questions }) => {
                   name="questions"
                   render={({ insert, remove }) => (
                     <div className="mb-4">
-                      <div className="flex items-center justify-between w-1/2 mx-auto mb-2">
+                      <div className="flex items-center justify-between w-3/4 mx-auto mb-2">
                         <Button
                           type="button"
                           disabled={formProps.isSubmitting}
