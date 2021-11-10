@@ -68,30 +68,30 @@ const Home = ({ trivia}) => {
 
         { !user && <Login /> }
         
-        <div className="flex flex-col justify-between w-4/5 lg:w-3/4 xl:w1/2 mx-auto">
+        <div className="flex flex-col justify-between w-4/5 lg:w-3/4 xl:w-3/5 mx-auto">
           <p className="flex flex-col justify-between w-full mx-auto my-6 text-white text-2xl lg:text-3xl font-helvetica italic">
             <span className="mx-auto">La playa te reúne,</span>
             <span className="mx-auto">la música te reconecta,</span>
             <span className="mx-auto">las marcas se relacionan</span>
           </p>
-          <ul className="flex justify-between my-6">
-            <li className="w-16 md:w-28">
-              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
+          <ul className="flex flex-col sm:flex-row justify-between my-6">
+            <li className="w-full">
+              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto mb-2 rounded-xl shadow">
                 <Image src="/mediakit.png" width={80} height={80} />
               </div>
-                <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Mediakit</h3>
+              <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">Mediakit</h3>
             </li>
-            <li className="w-16 md:w-28">
-              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
+            <li className="w-full">
+              <div className="flex justify-center items-center bg-orange w-24 h-24 mb-2 mx-auto rounded-xl shadow">
                 <Image src="/ranking.png" width={80} height={80} />
               </div>
-              <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Ranking</h3>
+              <h3 className="mb-4 mx-auto h-auto text-center text-white text-xl font-helvetica">Ranking</h3>
             </li>
-            <li className="w-16 md:w-28">
-              <div className="flex justify-center items-center bg-orange w-24 h-24 mx-auto rounded-xl shadow">
-                <Image src="/reglas.png" width={80} height={80} />
+            <li className="w-full">
+              <div className="flex justify-center items-center bg-orange mx-auto w-24 h-24 mb-2 rounded-xl shadow">
+                <Image src="/reglas.png" width={60} height={60} />
               </div>
-              <h3 className="mt-2 mx-auto text-center text-white text-xl font-helvetica">Reglas</h3>
+              <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">Reglas</h3>
             </li>
           </ul>
           { user &&
