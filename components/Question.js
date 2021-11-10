@@ -92,7 +92,7 @@ export default function Question({ data, questionAnsweredCb }) {
   
     return (
       <div className="flex flex-col justify-between h-[100vh]">
-        <div className="mb-4 mx-auto w-full bg-blue-500">
+        <div className="mb-4 mx-auto w-full">
           <Heading className="text-3xl font-helvetica" color="white">{question.description}</Heading>
           <div className="relative p-2 m-2 w-full sm:w-3/5 h-80 mx-auto ">
             <div className="absolute top-[-20px] right-[-20px] z-10 w-[80px] h-[80px] ">
