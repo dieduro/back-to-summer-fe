@@ -10,7 +10,6 @@ const getAuthDataAndStore = async () => {
       const name = `${user.NOMBRE} ${user.APELLIDO}`
       await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name})
       .then((response) => {
-        console.log(99, response.email)
           if(response) { usersCreated++}
       })
   })

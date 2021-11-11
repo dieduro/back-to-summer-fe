@@ -24,9 +24,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
     // plug it into question state
 
     useEffect(()=> {
-      console.log("TIME USED: ", timeUsed)
       if (timeUsed) {
-        console.log(55, typeof(user.timeUsed))
         user.timeUsed += timeUsed
       }
 
@@ -43,7 +41,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
         } else {
           answeredQuestions[0] = question.id
         }
-        console.log(8181, user)
+
         const activeTrivia = JSON.parse(user.trivia)
         const [row, col] = matrixMapping(index)
         activeTrivia[row][col].answered = true
@@ -55,7 +53,6 @@ export default function Question({ data, index, questionAnsweredCb }) {
           answeredQuestions: answeredQuestions,
           trivia: JSON.stringify(activeTrivia)
         }
-        console.log(567, user)
         setAnswer(user.uid, data)
       }
       

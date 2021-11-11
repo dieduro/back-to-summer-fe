@@ -12,8 +12,6 @@ export default function Trivia() {
   const { triviaContext, setTriviaContext } = useTriviaContext();
   const router = useRouter()
 
-  //console.log(9090, user)
-
   useEffect(() => {
     if (user == false) {
       router.push('/')
@@ -25,8 +23,6 @@ export default function Trivia() {
     console.log(triviaContext)
     if (!triviaContext && user) {
       const data = await getTrivia(user)
-      console.log("PULLING TRIVIA from DB")
-      console.log("user: ", user)
       if (!user.hasActiveTrivia && (!user.trivia || user.trivia == '')) {
         const triviaJson = JSON.stringify(data)
         const userData = {trivia: triviaJson, hasActiveTrivia: true}
@@ -36,8 +32,6 @@ export default function Trivia() {
       setTriviaContext(data)
     }
   }, [user])
-
-  console.log(555, triviaContext)
 
   if (triviaContext?.length > 0) { return <Game trivia={triviaContext} /> }
   else if (!user) {
