@@ -7,7 +7,8 @@ const GridGame = ({questions}) => {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             if (questions[i][j] == null){
-                questions[i][j] = {id: `emp${i}`, questions: null}
+                const id = i +'-'+ j
+                questions[i][j] = {id: `emp${id}`, questions: null}
             }
         }
     }
@@ -16,10 +17,10 @@ const GridGame = ({questions}) => {
             <div className="h-full w-[18rem] sm:w-[28rem] lg:w-[32rem]">
             <div className="grid grid-cols-3 gap-2 w-full h-12 ">
                 <div className="flex justify-center items-center mr-4">
-                    <span className="text-white font-semibold font-helvetica text-2xl">MUSICA</span>
+                    <span className="text-white font-semibold font-helvetica text-2xl">PLAYA</span>
                 </div>
                 <div className="flex justify-center items-center mr-4">
-                    <span className="text-white font-semibold font-helvetica text-2xl">PLAYA</span>
+                    <span className="text-white font-semibold font-helvetica text-2xl">MUSICA</span>
                 </div>
                 <div className="flex justify-center items-center mr-4">
                     <span className="text-white font-semibold font-helvetica text-2xl">MARCAS</span>

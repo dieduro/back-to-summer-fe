@@ -1,25 +1,32 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from 'next/image'
-import { setAnswer } from "../lib/db"
-import classnames from "classnames";
-import VideoEmbed from "./VideoEmbed";
-import useAudio from "../hooks/useAudio";
+import { setAnswer, getUserData } from "../lib/db"
 import { useAuth } from "../lib/auth.js";
 import { TYPES } from "../utils/questionFormValues"
+import { matrixMapping } from '../utils/helpers'
+import useAudio from "../hooks/useAudio";
+import classnames from "classnames";
+
+import VideoEmbed from "./VideoEmbed";
 import Countdown from "./Countdown";
 import CheckCircle from "../icons/CheckCircle";
 import XCircle from "../icons/XCircle";
 import Heading from "../ui/Heading";
 
-export default function Question({ data, questionAnsweredCb }) {
+export default function Question({ data, index, questionAnsweredCb }) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [question, setQuestion] = useState(data);
-    const [timeUsed, setTimeUsed] = useState(null);
+    const [timeUsed, setTimeUsed] = useState(0);
+    const [user, setUser] = useState(useAuth().user);
     const audioRef = useRef(null)
-    const { user, updateUserProfile } = useAuth();
 
-    useEffect(( )=> {
+    // remove timeUsed state
+    // plug it into question state
+
+    useEffect(()=> {
+      console.log("TIME USED: ", timeUsed)
       if (timeUsed) {
+        console.log(55, typeof(user.timeUsed))
         user.timeUsed += timeUsed
       }
 
@@ -29,20 +36,34 @@ export default function Question({ data, questionAnsweredCb }) {
         }
       
         const score = question.isCorrect ? question.points : (question.points / 2) * -1
-        
+
+        let answeredQuestions = user.answeredQuestions
+        if (answeredQuestions)  {
+          answeredQuestions.push(question.id) 
+        } else {
+          answeredQuestions[0] = question.id
+        }
+        console.log(8181, user)
+        const activeTrivia = JSON.parse(user.trivia)
+        const [row, col] = matrixMapping(index)
+        activeTrivia[row][col].answered = true
+        activeTrivia[row][col].isCorrect = question.isCorrect
+
         const data = {
           timeUsed: user.timeUsed,
-          score: user.score + score,
-          answeredQuestions: user.answeredQuestions ? 
-            user.answeredQuestions.push(question.id) 
-            : user.answeredQuestions = [question.id]
+          score: parseInt(user.score) + parseInt(score),
+          answeredQuestions: answeredQuestions,
+          trivia: JSON.stringify(activeTrivia)
         }
-        setAnswer(user.id, data)
+        console.log(567, user)
+        setAnswer(user.uid, data)
       }
       
     }, [timeUsed])
 
-    useEffect(() => {
+    useEffect(async () => {
+      const userData = await getUserData(user.uid)
+      setUser(userData)
       if (question.answered) {
         setTimeout(() => {
           console.log("Pregunta respondida!")
@@ -57,10 +78,11 @@ export default function Question({ data, questionAnsweredCb }) {
     const { toggle: playSuccess } = useAudio("/sounds/success.mp3", 0.9);
   
 
-    const onTimerEnded = () => {
+    const onTimerEnded = (time) => {
       console.log("Timer ended!")
       playError();
       setSelectedOption(null);
+      setTimeUsed(time);
       setQuestion({
         ...question,
         answered: true,
@@ -146,7 +168,8 @@ export default function Question({ data, questionAnsweredCb }) {
                       "bg-green text-white",
                     question.answered &&
                       question.validOption !== option.id &&
-                      "bg-red text-white"
+                      "bg-red text-white",
+                      question.answered && option.id == selectedOption?.id && "border border-black",
                   ])}
                 >
                   <span className="font-bold mx-auto">{option.content}</span>

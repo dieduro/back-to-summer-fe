@@ -12,7 +12,7 @@ const Countdown = ({ time, onFinish, onStart, onTimerStop, shouldRun, ...props})
         isRunning,
         start,
         pause,
-      } = useTimer({ expiryTimestamp, onExpire: () => onFinish() });
+      } = useTimer({ expiryTimestamp, onExpire: () => onFinish(seconds) });
     
     const radius = 50
     const progress = 50

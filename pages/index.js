@@ -1,13 +1,10 @@
 import React, {useEffect} from "react";
+import { useAuth } from "../lib/auth.js";
+import Home from "../components/Home";
+import { Circles } from "@agney/react-loading";
 import theme from "../theme.json";
 
-import { Circles } from "@agney/react-loading";
-import Home from "../components/Home";
-import Login from "../components/Login";
-import { useAuth } from "../lib/auth.js";
-import { getTrivia } from "../lib/db";
-
-export default function Index({ trivia }) {
+export default function Index() {
 
   const { user } = useAuth();
   const colors = theme.colors;
@@ -23,12 +20,5 @@ export default function Index({ trivia }) {
       </div>
     );
   } 
-  return <Home trivia={trivia} />
-}
-
-export async function getServerSideProps(context) {
-  const trivia = await getTrivia();
-  return {
-    props: trivia,
-  };
+  return <Home />
 }

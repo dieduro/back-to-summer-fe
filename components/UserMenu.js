@@ -38,7 +38,7 @@ const UserMenu = () => {
                   }}
                   className="focus:outline-none focus:ring w-full text-secondary text-left"
                 >
-                  Sign out
+                  Cerrar Sesión
                 </button>
               </div>
             </div>

@@ -24,7 +24,6 @@ const QuestionsForm = ({ questions }) => {
   const onSubmit = async (values) => {
     setMessage("Processing...");
     
-    console.log(22, values)
     return new Promise(async (resolve, reject) => {
       try {
         await addQuestions(currentQuestionIds, values.questions);
