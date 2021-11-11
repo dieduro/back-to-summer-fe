@@ -10,7 +10,7 @@ const Header = () => {
 
   const { user } = useAuth();
   const router = useRouter()
-
+console.log(444, router.pathname)
   if (router.pathname == '/trivia') {
     return <></>
   } else {

@@ -9,10 +9,13 @@ export default function Leaderboard({ data }) {
   const users = data.users;
 
   return (
-    <div className="mx-auto w-4/5 h-full bg-primary">
-      <div className="flex justify-center content-center py-4 w-1/2 mx-auto my-0">
-        <Heading className="font-semibold">LEADERBOARD</Heading>
-      </div>
+    <div className="mx-auto w-4/5 h-full">
+      <div className="relative h-auto">
+          <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
+            back to summer
+          </h1>
+          <h3 className="w-64 mx-auto mt-4 p-2 text-white text-4xl text-center align-middle font-helvetica" >Ranking</h3>
+        </div>
       <div className="flex items-center w-full lg:px-4 py-4">
         <div className="overflow-x-auto w-full">
           <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">

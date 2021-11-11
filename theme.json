@@ -3,14 +3,15 @@
     "primary":
     {
       "light": "#F48C06",
-      "DEFAULT": "#E85D04",
+      "DEFAULT": "#FF8900",
       "dark": "#DC2F02"
     },
     "secondary": "#8ecae6",
     "alternate": "#8ecae6",
     "orange": "#FF8900",
     "yellow": "#FFE200",
-    "red": "#EE523A",
+    "red": "#ED444A",
+    "green": "#00B229 ",
     "ocher": "#E58314",
     "dark": "#131d54",
     "white": "#f6f8ffff",

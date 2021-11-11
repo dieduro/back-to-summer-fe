@@ -19,17 +19,17 @@ export default function QuestionBox({data}) {
      !data.answered ?
     (   
       <Link href={!data.answered ? `/trivia/${data.id}` : ''}  disabled={data.answered} className={data.answered ? 'pointer-events-none' : '' }>
-        <div className={`flex flex-col content-center justify-center ${backgroundColor} ${opacity} w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden`}>
+        <div className={`flex flex-col content-center justify-center ${backgroundColor} ${opacity} w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden shadow rounded-md`}>
             <h3 className="h-8 w-1/2 mx-auto text-center align-middle sm:text-2xl md:text-3xl text-white font-helvetica">{data.points}</h3>
         </div>
       </Link> )
       : (
-        <div className={`flex flex-col content-center justify-center bg-dark ${opacity} w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden`}>
+        <div className={`flex flex-col content-center justify-center bg-dark ${opacity} w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden rounded-md`}>
             { data.isCorrect ? <CheckCircle/> : <XCircle fillColor="red" />}
         </div>
       )
     : (
-      <div className="w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden border border-black border-dashed"></div>
+      <div className="w-20 h-20 sm:w-32 sm:h-32 lg:w-36 lg:h-36 px-2 overflow-hidden border border-black border-dashed rounded-md"></div>
     )}
     </>
   );
