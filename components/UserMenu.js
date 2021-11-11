@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { useAuth } from "../lib/auth";
+import { useTriviaContext } from '../contexts/TriviaContext';
 import ChevronRight from "../icons/ChevronRight";
 
 const UserMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { triviaContext, setTriviaContext } = useTriviaContext();
     const { user, signout } = useAuth();
+
+    const signOutCb = () => {
+      setTriviaContext(null)
+      setIsOpen(false);
+      signout();
+    }
   
     return (
       <div className="relative inline-block h-12">
@@ -33,9 +41,7 @@ const UserMenu = () => {
                 aria-labelledby="options-menu"
               >
                 <button
-                  onClick={() => {
-                    signout();
-                  }}
+                  onClick={signOutCb}
                   className="focus:outline-none focus:ring w-full text-secondary text-left"
                 >
                   Cerrar Sesión

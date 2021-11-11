@@ -14,7 +14,7 @@ export default function Leaderboard({ data }) {
           <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
             back to summer
           </h1>
-          <h3 className="w-64 mx-auto mt-8 p-2 text-white text-4xl text-center align-middle font-helvetica" >Ranking</h3>
+          <h3 className="w-64 mx-auto mt-4 p-2 text-white text-4xl text-center align-middle font-helvetica" >Ranking</h3>
         </div>
       <div className="flex items-center w-full lg:px-4 py-4">
         <div className="overflow-x-auto w-full">

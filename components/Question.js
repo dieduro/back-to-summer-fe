@@ -47,6 +47,8 @@ export default function Question({ data, index, questionAnsweredCb }) {
         activeTrivia[row][col].answered = true
         activeTrivia[row][col].isCorrect = question.isCorrect
 
+        console.log("user.score: ", user.score)
+        console.log("score: ", score)
         const data = {
           timeUsed: user.timeUsed,
           score: parseInt(user.score) + parseInt(score),

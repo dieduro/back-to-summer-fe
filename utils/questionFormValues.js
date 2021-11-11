@@ -18,22 +18,6 @@ export const TYPES =
     }
 ]
 
-export const SCORES =
-[
-    {
-        value: '200',
-        copy: '200 puntos'
-    },
-    {
-        value: '400',
-        copy: '400 puntos'
-    },
-    {
-        value: '800',
-        copy: '800 puntos'
-    }
-]
-
 export const DIFFICULTIES =
 [
     {
