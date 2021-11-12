@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Link from 'next/link'
 import Image from "next/image"
 import { useAuth } from "../lib/auth.js";
@@ -29,14 +28,16 @@ const Home = () => {
             <span className="mx-auto">las marcas se relacionan</span>
           </p>
           <ul className="flex flex-col sm:flex-row justify-between w-3/4 my-2 mx-auto">
-            <li className="w-auto">
-              <div className="flex justify-center items-center bg-orange w-20 h-20 mx-auto mb-2 rounded-xl shadow">
-                <Image src="/mediakit.png" width={50} height={50} />
-              </div>
-              <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">Mediakit</h3>
-            </li>
-            <Link href="/leaderboard">
+            <a href="https://mediamaxargentina.com/downloads/mediamax_verano2022.pdf" target="_blank" rel="noopener noreferrer" download>
               <li className="w-auto">
+                <div className="flex justify-center items-center bg-orange w-20 h-20 mx-auto mb-2 rounded-xl shadow">
+                  <Image src="/mediakit.png" width={50} height={50} />
+                </div>
+                <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">Mediakit</h3>
+              </li>
+            </a>
+            <Link href="/leaderboard">
+              <li className="w-auto cursor-pointer">
                 <div className="flex justify-center items-center bg-orange w-20 h-20 mb-2 mx-auto rounded-xl shadow">
                   <Image src="/ranking.png" width={50} height={50} />
                 </div>
@@ -44,7 +45,7 @@ const Home = () => {
               </li>
             </Link>
               <Link href="/rules">
-                <li className="w-auto">
+                <li className="w-auto cursor-pointer">
                     <div className="flex justify-center items-center bg-orange mx-auto w-20 h-20 mb-2 rounded-xl shadow">
                       <Image src="/reglas.png" width={50} height={50} />
                     </div>
