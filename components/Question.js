@@ -113,25 +113,27 @@ export default function Question({ data, index, questionAnsweredCb }) {
     }
 
     const isOnlyTextQuestion = question.type == TYPES[0].value 
-    const containerHeight = !isOnlyTextQuestion ? 'h-80' : ''
+    const containerHeight = !isOnlyTextQuestion ? 'h-64 sm:h-80' : ''
     const countdownStyle = classnames([isOnlyTextQuestion ? 
       'relative mx-auto' : 'absolute top-[-25px] right-[-25px]', 
       ' z-10 w-[100px] h-[100px]']) 
   
     return (
       <div className="flex flex-col w-11/12 lg:w-3/5 mx-auto justify-between ">
-        <div className="mb-4 mx-auto w-full">
+        <div className="mb-2 mx-auto w-full">
           <Heading className="text-3xl font-helvetica font-semibold w-4/5 mx-auto" color="white">{question.description}</Heading>
-          <div className={`relative p-2 mt-6 w-full sm:w-3/5 ${containerHeight} mx-auto`}>
+          <div className='relative p-2 mt-4 w-full sm:w-4/6 h-full mx-auto'>
             { question.type == 'image' && question.imageUrl &&
-              <Image 
-                src={question.imageUrl}
-                alt="Imagen para la pregunta"
-                layout="fill"
-                objectFit="contain"
-                priority
-                onLoadingComplete={e => {console.log("Load complete")}}
-              /> 
+              <div className={`${containerHeight}`}>
+                <Image 
+                  src={question.imageUrl}
+                  alt="Imagen para la pregunta"
+                  layout="fill"
+                  objectFit="contain"
+                  priority
+                  onLoadingComplete={e => {console.log("Load complete")}}
+                />
+              </div>
             }
             {
               question.type == 'video' && question.videoUrl &&
