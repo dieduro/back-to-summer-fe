@@ -60,7 +60,6 @@ const QuestionView = () => {
               back to summer
             </h1>
           </div>
-          {console.log(9999, question)}
           <Question data={question.data[0]} index={question.index} questionAnsweredCb={onQuestionAnswered}/> 
         </div>
       </div> 

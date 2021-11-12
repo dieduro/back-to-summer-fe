@@ -13,17 +13,17 @@ const GridGame = ({questions}) => {
         }
     }
     return (
-        <div className="flex  mx-auto">
+        <div className="flex mx-auto">
             <div className="h-full w-[18rem] sm:w-[28rem] lg:w-[32rem]">
             <div className="grid grid-cols-3 gap-2 w-full h-12 ">
                 <div className="flex justify-center items-center mr-4">
-                    <span className="text-white font-semibold font-helvetica text-2xl">PLAYA</span>
+                    <span className="text-white font-semibold font-helvetica text-md sm:text-2xl">PLAYA</span>
                 </div>
                 <div className="flex justify-center items-center mr-4">
-                    <span className="text-white font-semibold font-helvetica text-2xl">MUSICA</span>
+                    <span className="text-white font-semibold font-helvetica text-md sm:text-2xl">MÚSICA</span>
                 </div>
                 <div className="flex justify-center items-center mr-4">
-                    <span className="text-white font-semibold font-helvetica text-2xl">MARCAS</span>
+                    <span className="text-white font-semibold font-helvetica text-md sm:text-2xl">MARCAS</span>
                 </div>
             </div>
                 <div className="grid grid-cols-3 gap-2">
