@@ -23,7 +23,8 @@ export default function Trivia() {
     console.log(triviaContext)
     if (!triviaContext && user) {
       const data = await getTrivia(user)
-      if (!user.hasActiveTrivia && (!user.trivia || user.trivia == '')) {
+
+      if (!data.error && !user.hasActiveTrivia && (!user.trivia || user.trivia == '')) {
         const triviaJson = JSON.stringify(data)
         const userData = {trivia: triviaJson, hasActiveTrivia: true}
         setActivteTriviaToUser(user.uid, userData )

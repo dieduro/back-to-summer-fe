@@ -9,9 +9,9 @@ const Game = ({ trivia }) => {
   const { user } = useAuth();
   useEffect(async () => {
     const data = await getUserData(user.uid);
-    console.log(222, data)
     setUserData(data)
   }, [])
+  
   return (
     <div className="flex flex-col w-[100vw] mx-auto">
       <div className="flex flex-col mx-auto mt-2 self-center w-[100vw] h-auto">
