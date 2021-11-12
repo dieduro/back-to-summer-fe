@@ -5,10 +5,9 @@ import GridGame from "./GridGame.js"
 import Button from "../ui/Button"
 
 const Score = ({ value }) => {
-
   return (
     <span className="inline-flex items-center justify-center
-          min-w-40 max-h-12 mx-auto my-4 px-6 py-2 rounded-3xl
+          min-w-40 max-h-12 mx-auto mt-8 px-6 py-2 rounded-3xl
           bg-white
           text-primary font-helvetica font-medium text-2xl
           disabled:opacity-50 focus:outline-none focus:ring">{value}</span>
@@ -46,7 +45,7 @@ const Game = ({ trivia }) => {
           <>
             <GridGame questions={trivia}/>
             {
-              userData?.score && userData.answeredQuestions > 1 &&
+              userData.answeredQuestions.length > 0 &&
               <Score value={userData.score} />
             }
           </>

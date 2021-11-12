@@ -66,7 +66,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
       if (question.answered) {
         setTimeout(() => {
           console.log("Pregunta respondida!")
-          //questionAnsweredCb(question)
+          questionAnsweredCb(question)
         }, 2000)
       }
     }, [question])
