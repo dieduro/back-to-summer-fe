@@ -6,11 +6,20 @@ import { useAuth } from "../../lib/auth";
 import Button from '../../ui/Button'
 import Game from "../../components/Game";
 import { getTrivia, setActivteTriviaToUser } from "../../lib/db";
+import { Circles } from "@agney/react-loading";
+import theme from "../../theme.json";
 
 export default function Trivia() {
+  const [ loading, setLoading ] = useState(true);
   const { user } = useAuth();
   const { triviaContext, setTriviaContext } = useTriviaContext();
   const router = useRouter()
+
+  const colors = theme.colors;
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 800);
 
   useEffect(() => {
     if (user == false) {
@@ -34,8 +43,15 @@ export default function Trivia() {
     }
   }, [user])
 
+  if (loading) {
+    return (
+    <div className="content-center mx-auto w-28 mt-28">
+        <Circles width="110" height="120" color={colors.white} />
+      </div>)
+  } 
+
   if (triviaContext?.length > 0) { return <Game trivia={triviaContext} /> }
-  else if (!user) {
+  else if (user == false) {
     return ( 
       <div className="content-center mx-auto w-80 mt-28">
         <h1 className="font-helvetica text-white text-4xl">Por favor iniciá sesión para jugar</h1>
