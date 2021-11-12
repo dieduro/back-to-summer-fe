@@ -41,7 +41,7 @@ const Home = () => {
                 <div className="flex justify-center items-center bg-orange w-20 h-20 mb-2 mx-auto rounded-xl shadow">
                   <Image src="/ranking.png" width={50} height={50} />
                 </div>
-                <a className="mb-4 mx-auto h-auto text-center text-white text-xl font-helvetica">Ranking</a>
+                <h3 className="mb-4 mx-auto h-auto text-center text-white text-xl font-helvetica">Ranking</h3>
               </li>
             </Link>
               <Link href="/rules">
