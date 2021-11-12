@@ -41,20 +41,23 @@ export default function Question({ data, index, questionAnsweredCb }) {
         } else {
           answeredQuestions[0] = question.id
         }
-
         const activeTrivia = JSON.parse(user.trivia)
         const [row, col] = matrixMapping(index)
         activeTrivia[row][col].answered = true
         activeTrivia[row][col].isCorrect = question.isCorrect
+        const newCurrentResponses = user.currentResponses + 1
 
-        console.log("user.score: ", user.score)
-        console.log("score: ", score)
         const data = {
           timeUsed: user.timeUsed,
           score: parseInt(user.score) + parseInt(score),
           answeredQuestions: answeredQuestions,
-          trivia: JSON.stringify(activeTrivia)
+          trivia: JSON.stringify(activeTrivia),
+          currentResponses : newCurrentResponses
         }
+        if (newCurrentResponses == 9) {
+          data.roundsPlayed = user.roundsPlayed + 1
+        }
+        
         setAnswer(user.uid, data)
       }
       

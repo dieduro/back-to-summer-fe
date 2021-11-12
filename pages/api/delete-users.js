@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         })
     })
     await deleteUsers(userIds).then(response => {
-        console.log(response.users.length)
+        console.log(response.users)
     })
     
     if (res.statusCode == 200) {

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Formik, FieldArray, Form } from "formik";
 import { addQuestions, removeQuestion } from "../lib/db";
-import { parseYouTubeUrl } from "../utils/parseYouTubeUrl";
 import * as Yup from "yup";
 import Button from "../ui/Button";
 import { v4 as uuidv4 } from "uuid";

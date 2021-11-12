@@ -1,12 +1,16 @@
 import Link from 'next/link'
 import Image from "next/image"
-import { useAuth } from "../lib/auth.js";
+import { playNewTrivia } from '../utils/helpers';
 import Login from "../components/Login";
 import Button from "../ui/Button";
+import router from 'next/router';
 
-const Home = () => {
-  const { user } = useAuth();
+const Home = ({user}) => {
 
+  const onResetTrivia = async () => {
+    await playNewTrivia(user)
+    router.reload()
+  }
   return (
     <div className="flex flex-col justify-around mx-auto lg:w-2/3 md:w-4/5">
         
@@ -54,12 +58,26 @@ const Home = () => {
               </Link>
           </ul>
           { user &&
-          <div className="relative flex justify-center mt-2 mb-6"> 
-            <Button>
-              <Link href="/trivia">
-                Jugar
-              </Link>
-            </Button>
+          <div className="relative flex flex-col justify-center mt-2 mb-6"> 
+            {
+              user.currentResponses > 0 ?
+              <div className="flex flex-col justify-between">
+                <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica font-semibold">
+                Respondiste <span className="font-bold text-red">{user.currentResponses}</span>/9 preguntas</h3>
+                { user.roundsPlayed < 2 ? 
+                  <Button onClick={onResetTrivia}>
+                    Jugar una nueva trivia
+                  </Button>
+                  : <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">No te quedan trivias por jugar.</h3>
+                }
+              </div>
+              : 
+              <Button>
+                <Link href="/trivia">
+                  Jugar
+                </Link>
+              </Button>
+            }
             </div>
           }
         </div>

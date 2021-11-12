@@ -6,9 +6,11 @@ const getAuthDataAndStore = async () => {
   let usersCreated = 0
 
   await read(url).then(async (users) => {
+    console.log(users)
     await  users.map(async (user) => {
       const name = `${user.NOMBRE} ${user.APELLIDO}`
-      await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name})
+      const company = user.AGENCIA
+      await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name, company})
       .then((response) => {
           if(response) { usersCreated++}
       })
