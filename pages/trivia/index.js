@@ -27,7 +27,6 @@ export default function Trivia() {
       router.push('/')
       return
     } else if (user != null) {
-      console.log(135, user)
       const data = await getUserData(user.uid);
       setUserData(data)
     }

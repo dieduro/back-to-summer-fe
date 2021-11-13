@@ -1,15 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import { getLeaderboard } from "../lib/db";
+import { useAuth } from "../lib/auth.js";
 import Button from "../ui/Button";
-import Heading from "../ui/Heading";
 import LeaderboardRow from "../components/LeaderboardRow";
 
 export default function Leaderboard({ data }) {
-  const users = data.users;
+  const players = data.users;
+  const { user } = useAuth();
 
   return (
-    <div className="mx-auto w-4/5 h-full">
+    <div className="mx-auto w-11/12 sm:w-4/5 h-full">
       <div className="relative h-auto">
           <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
             back to summer
@@ -18,28 +19,26 @@ export default function Leaderboard({ data }) {
         </div>
       <div className="flex items-center w-full lg:px-4 py-4">
         <div className="overflow-x-auto w-full">
-          <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden">
+          <table className="mx-auto max-w-4xl w-full whitespace-nowrap rounded-lg divide-y divide-gray-300 overflow-hidden">
             <thead className="bg-gray-50">
               <tr className="text-gray-600 text-left">
-                <th className="font-semibold text-sm text-secondary uppercase px-6 py-4">
-                  nombre
+              <th className="font-semibold text-sm text-white uppercase w-8 pl-2 py-2">
                 </th>
-                {/* <th className="font-semibold text-sm uppercase px-6 py-4">
-                  e-mail
-                </th> */}
-                {/* <th className="font-semibold text-sm uppercase px-6 py-4 text-center">
-                  status
-                </th> */}
-                <th className="font-semibold text-sm text-secondary uppercase px-6 py-4 text-center">
-                  score
+                <th className="font-semibold text-sm text-white uppercase pl-4 py-2">
+                  Nombre
                 </th>
-                <th className="font-semibold text-sm uppercase px-6 py-4"></th>
+                <th className="font-semibold text-sm text-white uppercase pl-4 py-2 text-center">
+                  Score
+                </th>
+                <th className="text-white font-semibold text-sm uppercase pl-4 py-2">Tiempo</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {users.map((user) => (
-                <LeaderboardRow key={user.uid} user={user} />
-              ))}
+              {players.map((player,i) => {
+                let isCurrentUser = false
+                if (user && player.uid === user.uid) { isCurrentUser = true}
+                return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
+              })}
             </tbody>
           </table>
         </div>

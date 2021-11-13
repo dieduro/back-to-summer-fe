@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import Link from 'next/link';
 import GridGame from "./GridGame.js"
 import Button from "../ui/Button"
 import { playNewTrivia } from "../utils/helpers.js";
@@ -36,7 +36,9 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
           <div className="flex flex-col justify-between w-1/2 mx-auto">
             <h3 className="text-white text-2xl font-helvetica text-center">¡Felicitaciones!</h3>
             <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final fue: </p>
+            
             <Score value={user.score}/>
+            <Link href="/leaderboard"><Button>Ranking</Button></Link>
             <Button onClick={onResetTrivia}>Jugar una nueva trivia</Button>
           </div>
           :

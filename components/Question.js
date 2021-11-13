@@ -16,19 +16,16 @@ import Heading from "../ui/Heading";
 export default function Question({ data, index, questionAnsweredCb }) {
     const [selectedOption, setSelectedOption] = useState(null);
     const [question, setQuestion] = useState(data);
-    const [timeUsed, setTimeUsed] = useState(0);
     const [user, setUser] = useState(useAuth().user);
     const audioRef = useRef(null)
 
-    // remove timeUsed state
-    // plug it into question state
-
     useEffect(()=> {
-      if (timeUsed) {
-        user.timeUsed += timeUsed
+
+      if (question.timeUsed) {
+        user.timeUsed += question.timeUsed
       }
 
-      if (question.answered && timeUsed) {
+      if (question.answered && question.timeUsed) {
         if (question.type == TYPES.AUDIO) {
           audioRef.current.pause()
         }
@@ -61,7 +58,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
         setAnswer(user.uid, data)
       }
       
-    }, [timeUsed])
+    }, [question.timeUsed])
 
     useEffect(async () => {
       const userData = await getUserData(user.uid)
@@ -75,18 +72,26 @@ export default function Question({ data, index, questionAnsweredCb }) {
     }, [question])
   
     
-  
+    
     const { toggle: playError } = useAudio("/sounds/error.mp3", 0.2);
     const { toggle: playSuccess } = useAudio("/sounds/success.mp3", 0.9);
   
+    const setTimeUsed = (timeUsed) => {
+      setQuestion(
+        {
+          ...question,
+          timeUsed: timeUsed
+        }
+      )
+    }
 
     const onTimerEnded = (time) => {
       console.log("Timer ended!")
       playError();
       setSelectedOption(null);
-      setTimeUsed(time);
       setQuestion({
         ...question,
+        timeUsed: time,
         answered: true,
         isCorrect: false,
       });
@@ -166,7 +171,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
               >
                 <div
                   className={classnames([
-                    "flex justify-between items-center w-full h-16 md:h-16 px-4 py-2 bg-white text-secondary text-xl text-left rounded-full",
+                    "flex justify-between items-center w-full h-16 md:h-16 px-4 py-2 bg-white text-secondary text-md md:text-xl text-left rounded-full",
                     question.answered &&
                       question.validOption === option.id &&
                       "bg-green text-white",

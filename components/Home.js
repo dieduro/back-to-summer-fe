@@ -11,6 +11,14 @@ const Home = ({user}) => {
     await playNewTrivia(user)
     router.reload()
   }
+
+  const roundFinished = user?.hasActiveTrivia && user?.currentResponses == 9
+  const button = {
+    text: roundFinished ? "Jugar una nueva trivia" : "Jugar" ,
+    href: roundFinished ? '' : "/trivia",
+    onClickCb: roundFinished ? onResetTrivia : null,
+  }
+
   return (
     <div className="flex flex-col justify-around mx-auto lg:w-2/3 md:w-4/5">
         
@@ -31,7 +39,7 @@ const Home = ({user}) => {
             <span className="mx-auto">la música te reconecta,</span>
             <span className="mx-auto">las marcas se relacionan</span>
           </p>
-          <ul className="flex flex-col sm:flex-row justify-between w-3/4 my-2 mx-auto">
+          <ul className="flex flex-row justify-between w-full sm:w-3/4 my-2 mx-auto">
             <a href="https://mediamaxargentina.com/downloads/mediamax_verano2022.pdf" target="_blank" rel="noopener noreferrer" download>
               <li className="w-auto">
                 <div className="flex justify-center items-center bg-orange w-20 h-20 mx-auto mb-2 rounded-xl shadow">
@@ -59,25 +67,26 @@ const Home = ({user}) => {
           </ul>
           { user &&
           <div className="relative flex flex-col justify-center mt-2 mb-6"> 
-            {
-              user.currentResponses > 0 ?
               <div className="flex flex-col justify-between">
                 <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica font-semibold">
                 Respondiste <span className="font-bold text-red">{user.currentResponses}</span>/9 preguntas</h3>
-                { user.roundsPlayed < 2 ? 
-                  <Button onClick={onResetTrivia}>
-                    Jugar una nueva trivia
-                  </Button>
-                  : <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">No te quedan trivias por jugar.</h3>
-                }
               </div>
-              : 
-              <Button>
-                <Link href="/trivia">
-                  Jugar
-                </Link>
-              </Button>
-            }
+              {
+                !roundFinished ?
+                  <Link href={button.href}>
+                    <Button>
+                        {button.text}
+                    </Button>
+                  </Link>
+                : <>
+                    {user.roundsPlayed < 2 ? 
+                      <Button onClick={button.onClickCb}>
+                        {button.text}
+                      </Button>
+                    : <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica">No te quedan trivias por jugar.</h3>
+                    }
+                  </>
+              }
             </div>
           }
         </div>

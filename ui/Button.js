@@ -8,7 +8,7 @@ const Button = forwardRef(({ children, ...props }, ref) => {
       min-w-40 max-h-12 mx-auto my-4 px-6 py-2 rounded-3xl
       gradient-background hover:bg-primary-light hover:bg-opacity-50
       hover:scale-110 transition
-      text-white font-helvetica font-medium text-2xl
+      text-white font-helvetica font-medium text-xl sm:text-2xl
       disabled:opacity-50 focus:outline-none focus:ring"
       {...props}
     >
