@@ -12,6 +12,11 @@ export default function Rules() {
 
     return (
         <>
+            <div className="relative h-auto">
+                <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
+                    back to summer
+                </h1>
+            </div>
             <div className="content-center mx-auto w-full sm:w-3/4 p-6">
                 <p className={pStyle}>
                     🌊 Cada participante tendrá la posibilidad de jugar 2 veces únicamente. </p>
