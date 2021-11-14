@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { getUserData } from "../lib/db"
-import { useAuth } from "../lib/auth.js";
+import Link from 'next/link';
 import GridGame from "./GridGame.js"
 import Button from "../ui/Button"
+import { playNewTrivia } from "../utils/helpers.js";
+import router from "next/router";
 
 const Score = ({ value }) => {
   return (
@@ -15,16 +15,14 @@ const Score = ({ value }) => {
 
 }
 
-const Game = ({ trivia }) => {  
-  const [userData, setUserData] = useState(null)
-  
-  const { user } = useAuth();
-  useEffect(async () => {
-    const data = await getUserData(user.uid);
-    setUserData(data)
-  }, [])
+const Game = ({ trivia, user, resetTriviaCb }) => {  
 
-  if (!userData) return null
+  const onResetTrivia = async () => {
+    await playNewTrivia(user)
+    router.push('/')
+  }
+
+  if (!user) return null
   return (
     <div className="flex flex-col w-[100vw] mx-auto">
       <div className="flex flex-col mx-auto mt-2 self-center w-[100vw] h-auto">
@@ -34,19 +32,21 @@ const Game = ({ trivia }) => {
           </h1>
         </div>
         {
-          userData.answeredQuestions.length == 9 ?
+          user.currentResponses == 9 ?
           <div className="flex flex-col justify-between w-1/2 mx-auto">
-            <h3>¡Felicitaciones!</h3>
-            <p>Tu puntaje final fue: </p>
-            <Score value={userData.score}/>
-            <Button>Jugar una nueva trivia</Button>
+            <h3 className="text-white text-2xl font-helvetica text-center">¡Felicitaciones!</h3>
+            <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final fue: </p>
+            
+            <Score value={user.score}/>
+            <Link href="/leaderboard"><Button>Ranking</Button></Link>
+            <Button onClick={onResetTrivia}>Jugar una nueva trivia</Button>
           </div>
           :
           <>
             <GridGame questions={trivia}/>
             {
-              userData.answeredQuestions.length > 0 &&
-              <Score value={userData.score} />
+              user.currentResponses > 0 &&
+              <Score value={user.score} />
             }
           </>
         }

@@ -1,5 +1,6 @@
+import { resetActivteTrivia } from "../lib/db"
 
-export  const matrixMapping = (index) => {
+export const matrixMapping = (index) => {
     if (index < 3) {
         return [0, index ]
     } else if (index >= 3 && index < 6) {
@@ -8,3 +9,7 @@ export  const matrixMapping = (index) => {
         return [2, index - 6]
     } 
   }
+
+export const playNewTrivia = async (userData) => {
+    await resetActivteTrivia(userData)
+} 

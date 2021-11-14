@@ -1,16 +1,25 @@
-import React, {useEffect} from "react";
+import { useState, useEffect} from "react";
 import { useAuth } from "../lib/auth.js";
+import { getUserData } from "../lib/db";
 import Home from "../components/Home";
 import { Circles } from "@agney/react-loading";
 import theme from "../theme.json";
 
 export default function Index() {
-
+  const [ userData, setUserData ] = useState(null);
   const { user } = useAuth();
   const colors = theme.colors;
 
-  useEffect(() => {
-    const user = localStorage.getItem("auth")
+  useEffect(async () => {
+    const localUser = localStorage.getItem("auth")
+    if (user != null) {
+      const data = await getUserData(user.uid);
+      setUserData(data)
+    }
+  }, [user])
+
+  useEffect(async() => {
+    
   }, [user])
 
   if (user == null) {
@@ -20,5 +29,5 @@ export default function Index() {
       </div>
     );
   } 
-  return <Home />
+  return <Home user={userData}/>
 }

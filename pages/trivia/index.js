@@ -5,12 +5,13 @@ import { useTriviaContext } from '../../contexts/TriviaContext';
 import { useAuth } from "../../lib/auth";
 import Button from '../../ui/Button'
 import Game from "../../components/Game";
-import { getTrivia, setActivteTriviaToUser } from "../../lib/db";
+import { getTrivia, setActivteTriviaToUser, getUserData } from "../../lib/db";
 import { Circles } from "@agney/react-loading";
 import theme from "../../theme.json";
 
 export default function Trivia() {
   const [ loading, setLoading ] = useState(true);
+  const [ userData, setUserData ] = useState(null);
   const { user } = useAuth();
   const { triviaContext, setTriviaContext } = useTriviaContext();
   const router = useRouter()
@@ -21,21 +22,24 @@ export default function Trivia() {
     setLoading(false);
   }, 800);
 
-  useEffect(() => {
+  useEffect(async() => {
     if (user == false) {
       router.push('/')
       return
+    } else if (user != null) {
+      const data = await getUserData(user.uid);
+      setUserData(data)
     }
   }, [user])
 
   useEffect(async () => {
-    console.log(triviaContext)
     if (!triviaContext && user) {
       const data = await getTrivia(user)
 
       if (!data.error && !user.hasActiveTrivia && (!user.trivia || user.trivia == '')) {
         const triviaJson = JSON.stringify(data)
         const userData = {trivia: triviaJson, hasActiveTrivia: true}
+        console.log(333, userData)
         setActivteTriviaToUser(user.uid, userData )
       }
 
@@ -50,7 +54,7 @@ export default function Trivia() {
       </div>)
   } 
 
-  if (triviaContext?.length > 0) { return <Game trivia={triviaContext} /> }
+  if (triviaContext?.length > 0) { return <Game trivia={triviaContext} user={userData}/> }
   else if (user == false) {
     return ( 
       <div className="content-center mx-auto w-80 mt-28">

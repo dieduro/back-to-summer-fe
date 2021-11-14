@@ -72,8 +72,8 @@ const EditableQuestion = ({
 
   const setDifficultyAndScore = (difficulty) => {
     let points
-    if (difficulty === DIFFICULTIES.BAJA) { points = 200 }
-    else if (difficulty === DIFFICULTIES.MEDIA) { points = 400 }
+    if (difficulty === DIFFICULTIES[0].value) { points = 200 }
+    else if (difficulty === DIFFICULTIES[1].value) { points = 400 }
     else { points = 800 }
 
     setFieldValue(`questions.${index}.points`, points)
