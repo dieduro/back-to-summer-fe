@@ -65,13 +65,11 @@ export default function Question({ data, index, questionAnsweredCb }) {
         
         setAnswer(user.uid, data)
 
-        if (question.answered && !answerResp?.error) {
+        if (question.answered) {
           setTimeout(() => {
             questionAnsweredCb(question)
           }, 2000)
-        } else if (answerResp?.error) {
-          setAnswerQuestionError(true)
-        }
+        } 
       }
       
     }, [question.timeUsed])
