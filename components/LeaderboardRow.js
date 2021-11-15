@@ -1,5 +1,5 @@
 const LeaderboardRow = ({ player, index, isCurrentUser }) => {
-  const { name, company, score, timeUsed } = player;
+  const { name, company, score, bestScore, timeUsed } = player;
   const rowStyle = isCurrentUser ? 'bg-red bg-opacity-75' : ''
   return (
     <tr className={rowStyle}>
@@ -10,7 +10,7 @@ const LeaderboardRow = ({ player, index, isCurrentUser }) => {
           <p className="text-white text-sm md:text-xl">{company}</p>
         </div>
       </td>
-      <td className="p-2 text-white text-center">{score}</td>
+      <td className="p-2 text-white text-center">{bestScore >= score ? bestScore : score}</td>
       <td className="p-2 text-white text-center">{timeUsed}</td>
     </tr>
   );

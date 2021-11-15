@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import GridGame from "./GridGame.js"
 import Button from "../ui/Button"
-import { playNewTrivia } from "../utils/helpers.js";
-import router from "next/router";
 
 const Score = ({ value }) => {
   return (
@@ -16,12 +14,6 @@ const Score = ({ value }) => {
 }
 
 const Game = ({ trivia, user, resetTriviaCb }) => {  
-
-  const onResetTrivia = async () => {
-    await playNewTrivia(user)
-    router.push('/')
-  }
-
   if (!user) return null
   return (
     <div className="flex flex-col w-[100vw] mx-auto">
@@ -35,12 +27,24 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
           user.currentResponses == 9 ?
           <div className="flex flex-col justify-between w-1/2 mx-auto">
             <h3 className="text-white text-2xl font-helvetica text-center">¡Felicitaciones!</h3>
-            <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final fue: </p>
+            {
+              user.bestScore >= user.score ?
+                <>
+                  <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final en esta trivia fue: {user.score} </p>
+                  <p className="text-white text-2xl font-helvetica text-center">Tu intento anterior fue mejor! Vamos a conservar ese 😃 </p>
+                  <Score value={user.bestScore}/>
+                </>
+              : 
+                <>
+                  <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final fue: </p>
+                  <Score value={user.score}/>
+                </>
+
+            }
             
-            <Score value={user.score}/>
             <Link href="/leaderboard"><Button>Ranking</Button></Link>
             { user.roundsPlayed < 2 &&
-              <Button onClick={onResetTrivia}>Jugar una nueva trivia</Button>
+              <Button onClick={resetTriviaCb}>Jugar una nueva trivia</Button>
             }
           </div>
           :
