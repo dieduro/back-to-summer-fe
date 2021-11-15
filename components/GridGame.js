@@ -13,7 +13,7 @@ const GridGame = ({questions}) => {
         }
     }
     return (
-        <div className="flex mx-auto">
+        <div className="flex mx-auto pb-4">
             <div className="h-full w-[18rem] sm:w-[28rem] lg:w-[32rem]">
             <div className="grid grid-cols-3 gap-2 w-full h-12 ">
                 <div className="flex justify-center items-center mr-4">
