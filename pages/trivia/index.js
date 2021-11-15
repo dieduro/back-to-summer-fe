@@ -39,7 +39,6 @@ export default function Trivia() {
       if (!data.error && !user.hasActiveTrivia && (!user.trivia || user.trivia == '')) {
         const triviaJson = JSON.stringify(data)
         const userData = {trivia: triviaJson, hasActiveTrivia: true}
-        console.log(333, userData)
         setActivteTriviaToUser(user.uid, userData )
       }
 
