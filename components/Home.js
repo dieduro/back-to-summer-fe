@@ -14,7 +14,7 @@ const Home = ({user}) => {
 
   const roundFinished = user?.hasActiveTrivia && user?.currentResponses == 9
   const button = {
-    text: roundFinished ? "Jugar una nueva trivia" : "Jugar" ,
+    text: roundFinished ? "Jugar una nueva trivia" : "JUGAR" ,
     href: roundFinished ? '' : "/trivia",
     onClickCb: roundFinished ? onResetTrivia : null,
   }
@@ -67,10 +67,6 @@ const Home = ({user}) => {
           </ul>
           { user &&
           <div className="relative flex flex-col justify-center mt-2 mb-6"> 
-              <div className="flex flex-col justify-between">
-                <h3 className="mb-4 mx-auto text-center text-white text-xl font-helvetica font-semibold">
-                Respondiste <span className="font-bold text-red">{user.currentResponses}</span>/9 preguntas</h3>
-              </div>
               {
                 !roundFinished ?
                   <Link href={button.href}>
