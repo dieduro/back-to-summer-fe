@@ -21,7 +21,9 @@ const Layout = ({ children }) => {
       <div className="absolute w-screen gradient-background-60 h-full">
       </div>  
       <div className="flex flex-col justify-between relative z-10 mx-auto min-h-screen">
-        {logged && !isPlaying && <div className="flex items-center justify-end pt-4 px-4"><UserMenu /></div> }
+        <div className="flex items-center justify-end pt-4 px-4 h-12">
+          {logged && !isPlaying && <UserMenu />}
+        </div>
         <main className="w-[100vw] h-auto">
           {children}
         </main>

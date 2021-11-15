@@ -1,20 +1,23 @@
 import { read } from "../../lib/sheetReader"
 import {signUpWithEmailAndPass} from "../../lib/apiAuth.js";
+import { getUser } from '../../lib/db'
 
 const getAuthDataAndStore = async () => {
   const url = process.env.NEXT_PUBLIC_USERS_SHEEET_URL
   let usersCreated = 0
 
   await read(url).then(async (users) => {
-    console.log(users)
+    console.log(users.length)
     await  users.map(async (user) => {
       const name = `${user.NOMBRE} ${user.APELLIDO}`
-      const company = user.AGENCIA
+      const company = user.EMPRESA
+      console.log(name)
       await signUpWithEmailAndPass({email: user.MAIL, pass:user.CODIGO, name, company})
       .then((response) => {
-          if(response) { usersCreated++}
+        //console.log(response.displayName)
+        usersCreated++
       })
-  })
+    })
   return users
 })
 };

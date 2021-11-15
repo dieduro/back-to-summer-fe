@@ -46,7 +46,8 @@ export default function Rules() {
                 <p className={pStyle}>
                     🌊 En caso de igualdad de puntos se definirá la posición en base al tiempo que utilizaron para responder las 9 preguntas (ejemplo: si dos participantes tienen 1.000 puntos tendrá un puesto mejor el que haya contestado en menos tiempo todo el juego) </p>
                 <p className={pStyle}>
-                    🌊 Ganará el juego aquel que sume la mayor cantidad de puntos, quien obtendrá el premio mayor. Los que estén dentro del top 10 reflejados en el ranking también obtendrán su premio por la posición obtenida. </p>
+                    🌊 Ganará el juego aquel que sume la mayor cantidad de puntos, quien obtendrá el premio mayor. Los que estén dentro del top 10 reflejados en el ranking también obtendrán su premio por la posición obtenida. 
+                </p>
             </div>
             <div className="flex justify-between w-full p-4">
                 <Link href="/">
