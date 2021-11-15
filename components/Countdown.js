@@ -4,7 +4,7 @@ import { useTimer } from 'react-timer-hook';
 
 
 
-const Countdown = ({ time, onFinish, onStart, onTimerStop, shouldRun, ...props}) => {
+const Countdown = ({ time, onFinish, onTimerStop, shouldRun, ...props}) => {
 
     const expiryTimestamp = Date.now() + time * 1000
     const {
@@ -15,9 +15,7 @@ const Countdown = ({ time, onFinish, onStart, onTimerStop, shouldRun, ...props})
       } = useTimer({ expiryTimestamp, onExpire: () => onFinish(seconds) });
     
     const radius = 50
-    const progress = 50
-    const containerClassNames = `flex relative mt-2 mx-auto w-full h-[${radius * 2}px]`
-
+    
     useEffect(() => {
         if (shouldRun) {
             start()

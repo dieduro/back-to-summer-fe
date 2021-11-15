@@ -12,12 +12,20 @@ import Countdown from "./Countdown";
 import CheckCircle from "../icons/CheckCircle";
 import XCircle from "../icons/XCircle";
 import Heading from "../ui/Heading";
+import { Circles } from "@agney/react-loading";
+import theme from "../theme.json";
 
 export default function Question({ data, index, questionAnsweredCb }) {
+
     const [selectedOption, setSelectedOption] = useState(null);
     const [question, setQuestion] = useState(data);
+    const isOnlyTextQuestion = question.type == TYPES[0].value 
+
+    const [loadingMedia, setLoadingMedia ] = useState(!isOnlyTextQuestion)
     const [user, setUser] = useState(useAuth().user);
     const audioRef = useRef(null)
+
+    const colors = theme.colors
 
     useEffect(()=> {
 
@@ -95,6 +103,10 @@ export default function Question({ data, index, questionAnsweredCb }) {
       });
     }
 
+    const mediaLoaded = () => {
+      setLoadingMedia(false)
+    }
+
     const onQuestionAnswered = (option) => {
       let answeredQuestion
       setSelectedOption(option);
@@ -118,11 +130,11 @@ export default function Question({ data, index, questionAnsweredCb }) {
       setQuestion(answeredQuestion);
     }
 
-    const isOnlyTextQuestion = question.type == TYPES[0].value 
     const containerHeight = !isOnlyTextQuestion ? 'h-64 sm:h-80' : ''
     const countdownStyle = classnames([isOnlyTextQuestion ? 
       'relative mx-auto' : 'absolute top-[-25px] right-[-25px]', 
       ' z-10 w-[100px] h-[100px]']) 
+    const mediaClassName = loadingMedia ? 'hidden' : 'transition'
   
     return (
       <div className="flex flex-col w-11/12 lg:w-3/5 mx-auto justify-between ">
@@ -130,20 +142,23 @@ export default function Question({ data, index, questionAnsweredCb }) {
           <Heading className="text-3xl font-helvetica font-semibold w-4/5 mx-auto" color="white">{question.description}</Heading>
           <div className='relative p-2 mt-4 w-full sm:w-4/6 h-full mx-auto'>
             { question.type == 'image' && question.imageUrl &&
-              <div className={`${containerHeight}`}>
+              <div className={`${containerHeight} ${mediaClassName}`}>
                 <Image 
                   src={question.imageUrl}
+                  className={mediaClassName}
                   alt="Imagen para la pregunta"
                   layout="fill"
                   objectFit="contain"
                   priority
-                  onLoadingComplete={e => {}}
+                  onLoadingComplete={mediaLoaded}
                 />
               </div>
             }
             {
               question.type == 'video' && question.videoUrl &&
-              <VideoEmbed url={question.videoUrl}/>
+              <div className={`w-full h-full ${mediaClassName}`}>
+                <VideoEmbed url={question.videoUrl} onLoadedDataCb={mediaLoaded} />
+              </div>
             }
             {
               question.type == 'audio' && question.audioUrl &&
@@ -154,9 +169,16 @@ export default function Question({ data, index, questionAnsweredCb }) {
                   </audio>
                 </div>
             }
-            <div className={countdownStyle}>
-              <Countdown time={20} shouldRun={!question.answered} onFinish={onTimerEnded} onTimerStop={setTimeUsed}/>
-            </div>
+            {loadingMedia ? 
+                <div className={`${containerHeight} w-full flex items-center justify-center mx-auto`}> 
+                  <Circles width="110" height="120" color={colors.white} />
+                </div>
+                : <div className={countdownStyle}>
+                    <Countdown time={20} shouldRun={!question.answered} onFinish={onTimerEnded} onTimerStop={setTimeUsed}/>
+                  </div>
+              }
+              
+            
           </div>
         </div>
         <ul className="flex flex-wrap justify-between w-full lg:w-3/4 md:h-52 mx-auto mt-2">
