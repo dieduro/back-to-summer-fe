@@ -1,5 +1,5 @@
 import React from "react";
-import { addQuestions } from "../lib/db";
+import { addQuestions, getTrivia } from "../lib/db";
 import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import QuestionsForm from "./QuestionsForm";
@@ -10,6 +10,11 @@ const registerUsers = async () => {
 
 const deleteUsers = async () => {
   await fetch('/api/delete-users').then(res => {console.log(res)})
+}
+
+const getTriviaTest = async () => {
+  const culi = await getTrivia()
+  console.log(33, culi)
 }
 
 const fixQuestionPoints = async () => {
@@ -42,11 +47,11 @@ const CreateTrivia = ({ questions }) => {
       <QuestionsForm questions={questions} />
       {
         process.env.NODE_ENV === 'development' &&
-        <>
+        <div className="flex flex-col justify-between h-60">
           <Button onClick={e => registerUsers()}>Registrar test users</Button>
           <Button onClick={e => deleteUsers()}>Borrar test users</Button>
-          {/* <Button onClick={e => fixQuestionPoints()}>Fix Puntajes</Button> */}
-        </>
+          <Button onClick={e => getTriviaTest()}>Get Trivia Test</Button>
+        </div>
       }
       
     </div>
