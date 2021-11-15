@@ -6,6 +6,7 @@ import { useAuth } from "../../lib/auth";
 import Button from '../../ui/Button'
 import Game from "../../components/Game";
 import { getTrivia, setActivteTriviaToUser, getUserData } from "../../lib/db";
+import { playNewTrivia } from "../../utils/helpers";
 import { Circles } from "@agney/react-loading";
 import theme from "../../theme.json";
 
@@ -22,7 +23,8 @@ export default function Trivia() {
     setLoading(false);
   }, 800);
 
-  useEffect(async() => {
+  useEffect(async () => {
+
     if (user == false) {
       router.push('/')
       return
@@ -30,9 +32,7 @@ export default function Trivia() {
       const data = await getUserData(user.uid);
       setUserData(data)
     }
-  }, [user])
 
-  useEffect(async () => {
     if (!triviaContext && user) {
       const data = await getTrivia(user)
 
@@ -42,18 +42,27 @@ export default function Trivia() {
         setActivteTriviaToUser(user.uid, userData )
       }
 
-      setTriviaContext(data)
-    }
+        setTriviaContext(data)
+      }
   }, [user])
+
+  const onResetTrivia = async () => {
+    await playNewTrivia(user)
+    setTriviaContext(null)
+    router.push('/')
+  }
 
   if (loading) {
     return (
-    <div className="content-center mx-auto w-28 mt-28">
-        <Circles width="110" height="120" color={colors.white} />
+      <div className="w-3/4 mx-auto">
+        <h1 className="font-blenny text-white text-4xl w-full text-center mb-2 mx-auto">Cargando</h1>
+        <div className="content-center mx-auto w-28 mt-12"> 
+          <Circles width="110" height="120" color={colors.white} />
+        </div>
       </div>)
-  } 
+  }
 
-  if (triviaContext?.length > 0) { return <Game trivia={triviaContext} user={userData}/> }
+  if (triviaContext?.length > 0) { return <Game trivia={triviaContext} user={userData} resetTriviaCb={onResetTrivia}/> }
   else if (user == false) {
     return ( 
       <div className="content-center mx-auto w-80 mt-28">
