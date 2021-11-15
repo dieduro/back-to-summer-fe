@@ -39,7 +39,9 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
             
             <Score value={user.score}/>
             <Link href="/leaderboard"><Button>Ranking</Button></Link>
-            <Button onClick={onResetTrivia}>Jugar una nueva trivia</Button>
+            { user.roundsPlayed < 2 &&
+              <Button onClick={onResetTrivia}>Jugar una nueva trivia</Button>
+            }
           </div>
           :
           <>
