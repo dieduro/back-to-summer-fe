@@ -27,10 +27,10 @@ export default function Leaderboard({ data }) {
                 <th className="font-semibold text-sm text-white uppercase pl-4 py-2">
                   Nombre
                 </th>
-                <th className="font-semibold text-sm text-white uppercase pl-4 py-2 text-center">
+                <th className="font-semibold text-sm text-white uppercase pl-4 py-2">
                   Score
                 </th>
-                <th className="text-white font-semibold text-sm uppercase pl-4 py-2">Tiempo</th>
+                <th className="text-white font-semibold text-sm uppercase px-4 py-2 w-14">Tiempo</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">

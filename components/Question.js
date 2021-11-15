@@ -65,7 +65,6 @@ export default function Question({ data, index, questionAnsweredCb }) {
       setUser(userData)
       if (question.answered) {
         setTimeout(() => {
-          console.log("Pregunta respondida!")
           questionAnsweredCb(question)
         }, 2000)
       }
@@ -86,7 +85,6 @@ export default function Question({ data, index, questionAnsweredCb }) {
     }
 
     const onTimerEnded = (time) => {
-      console.log("Timer ended!")
       playError();
       setSelectedOption(null);
       setQuestion({
@@ -139,7 +137,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
                   layout="fill"
                   objectFit="contain"
                   priority
-                  onLoadingComplete={e => {console.log("Load complete")}}
+                  onLoadingComplete={e => {}}
                 />
               </div>
             }
