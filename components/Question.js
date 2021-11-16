@@ -15,7 +15,7 @@ import Heading from "../ui/Heading";
 import { Circles } from "@agney/react-loading";
 import theme from "../theme.json";
 
-export default function Question({ data, index, questionAnsweredCb }) {
+export default function Question({ data, index, forceWrongAnswer, questionAnsweredCb }) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [question, setQuestion] = useState(data);
@@ -28,11 +28,14 @@ export default function Question({ data, index, questionAnsweredCb }) {
     const colors = theme.colors
 
     useEffect(async ()=> {
-      if (question.timeUsed > -1) {
-        user.timeUsed += question.timeUsed
+
+      if (forceWrongAnswer) {
+        question.answered = true
+        question.timeUsed = 10
+        question.isCorrect = false
       }
 
-      if (question.answered && user.timeUsed > -1) {
+      if (question.answered && question.timeUsed > -1) {
         if (question.type == TYPES.AUDIO) {
           audioRef.current.pause()
         }
@@ -52,7 +55,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
         const newCurrentResponses = user.currentResponses + 1
 
         const data = {
-          timeUsed: user.timeUsed,
+          timeUsed: question.timeUsed,
           score: parseInt(user.score) + parseInt(score),
           answeredQuestions: answeredQuestions,
           trivia: JSON.stringify(activeTrivia),
@@ -71,7 +74,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
         } 
       }
       
-    }, [question.timeUsed])
+    }, [question.timeUsed, forceWrongAnswer])
 
     useEffect(async () => {
       const userData = await getUserData(user.uid)
