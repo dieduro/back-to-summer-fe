@@ -17,7 +17,7 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
   if (!user) return null
 
   if (user.currentResponses == 9 && user.score > user.bestScore) {
-    await setBestScore(user.uid, user.score)
+    setBestScore(user.uid, user.score)
   }
 
   return (
