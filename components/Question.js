@@ -28,12 +28,11 @@ export default function Question({ data, index, questionAnsweredCb }) {
     const colors = theme.colors
 
     useEffect(async ()=> {
-
-      if (question.timeUsed) {
+      if (question.timeUsed > -1) {
         user.timeUsed += question.timeUsed
       }
 
-      if (question.answered && question.timeUsed) {
+      if (question.answered && user.timeUsed > -1) {
         if (question.type == TYPES.AUDIO) {
           audioRef.current.pause()
         }
@@ -128,7 +127,6 @@ export default function Question({ data, index, questionAnsweredCb }) {
           isCorrect: false,
         };
       }
-
       setQuestion(answeredQuestion);
     }
 
@@ -189,7 +187,7 @@ export default function Question({ data, index, questionAnsweredCb }) {
                 <button
                   className="flex w-full"
                   onClick={e =>{ onQuestionAnswered(option)}}
-                  disabled={!!selectedOption}
+                  disabled={!!selectedOption || loadingMedia}
                 >
                   <div
                     className={classnames([
