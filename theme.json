@@ -16,6 +16,7 @@
     "dark": "#131d54",
     "white": "#f6f8ffff",
     "error": "#E32800",
-    "gray": "#B3B6B7"
+    "gray": "#B3B6B7",
+    "grayLight": "#dcddde"
   }
 }
