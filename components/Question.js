@@ -145,7 +145,7 @@ export default function Question({ data, index, forceWrongAnswer, questionAnswer
             <Heading className="text-3xl font-helvetica font-semibold w-4/5 mx-auto" color="white">{question.description}</Heading>
             <div className='relative p-2 mt-4 w-full sm:w-4/6 h-full mx-auto'>
               { question.type == 'image' && question.imageUrl &&
-                <div className={`${containerHeight} ${mediaClassName}`}>
+                <div className={`relative ${containerHeight} ${mediaClassName}`}>
                   <Image 
                     src={question.imageUrl}
                     className={mediaClassName}

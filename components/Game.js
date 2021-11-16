@@ -16,7 +16,7 @@ const Score = ({ value }) => {
 const Game = ({ trivia, user, resetTriviaCb }) => {  
   if (!user) return null
 
-  if (user.currentResponses == 9 && user.score > user.bestScore) {
+  if (user.currentResponses == 9 && (user.score > user.bestScore || user.roundsPlayed == 1)) {
     setBestScore(user.uid, user.score)
   }
 
