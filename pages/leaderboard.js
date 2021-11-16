@@ -37,9 +37,13 @@ export default function Leaderboard({ data }) {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {players.map((player,i) => {
-                let isCurrentUser = false
-                if (user && player.uid === user.uid) { isCurrentUser = true}
-                return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
+                if (player.roundsPlayed > 0) {
+                  let isCurrentUser = false
+                  if (user && player.uid === user.uid) { isCurrentUser = true}
+                  return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
+                } else {
+                  return null
+                }
               })}
             </tbody>
           </table>

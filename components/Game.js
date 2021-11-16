@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { setBestScore } from '../lib/db';
 import GridGame from "./GridGame.js"
 import Button from "../ui/Button"
 
@@ -10,11 +11,15 @@ const Score = ({ value }) => {
           text-primary font-helvetica font-medium text-2xl
           disabled:opacity-50 focus:outline-none focus:ring">{value}</span>
   )
-
 }
 
 const Game = ({ trivia, user, resetTriviaCb }) => {  
   if (!user) return null
+
+  if (user.currentResponses == 9 && user.score > user.bestScore) {
+    await setBestScore(user.uid, user.score)
+  }
+
   return (
     <div className="flex flex-col w-[100vw] mx-auto">
       <div className="flex flex-col mx-auto mt-2 self-center w-[100vw] h-auto">
