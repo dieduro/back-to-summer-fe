@@ -35,6 +35,7 @@ module.exports = {
         white: theme.colors.white,
         dark: theme.colors.dark,
         gray: theme.colors.gray,
+        grayLight: theme.colors.grayLight,
         error: theme.colors.error,
       },
       backgroundImage: {

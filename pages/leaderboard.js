@@ -21,6 +21,11 @@ export default function Leaderboard({ data }) {
         </div>
       <div className="flex items-center w-full md:w-3/4 mx-auto lg:px-4 py-4 ">
         <div className="overflow-x-auto w-full">
+        { !players || players.length === 0 ?
+          <div className="w-3/4 mx-auto">
+            <h3 className="text-white text-xl font-helvetica text-center">No hay registros para mostrar en este momento.</h3>
+          </div>
+          :
           <table className="mx-auto max-w-4xl w-full whitespace-pre-wrap rounded-lg divide-y divide-gray-300 overflow-hidden">
             <thead className="bg-gray-50">
               <tr className="text-gray-600 text-left">
@@ -35,14 +40,19 @@ export default function Leaderboard({ data }) {
                 <th className="text-white font-semibold text-xs sm:text-sm uppercase px-4 py-2 w-14">Tiempo</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
-              {players.map((player,i) => {
-                let isCurrentUser = false
-                if (user && player.uid === user.uid) { isCurrentUser = true}
-                return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
-              })}
-            </tbody>
+                <tbody className="divide-y divide-gray-200">
+                  {players.map((player,i) => {
+                    if (player.roundsPlayed > 0) {
+                      let isCurrentUser = false
+                      if (user && player.uid === user.uid) { isCurrentUser = true}
+                      return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
+                    } else {
+                      return null
+                    }
+                  })}
+                </tbody>
           </table>
+          }
         </div>
       </div>
       <div className="flex items-center w-full lg:px-4 py-4">
@@ -56,6 +66,10 @@ export default function Leaderboard({ data }) {
 
 export async function getServerSideProps(context) {
   const data = await getLeaderboard();
+  if (data.error) {
+    console.log(data)
+    return { props: { data: [] } };
+  }
   return {
     props: { data },
   };

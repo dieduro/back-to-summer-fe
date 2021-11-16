@@ -34,11 +34,11 @@ const Countdown = ({ time, onFinish, onTimerStop, shouldRun, ...props}) => {
             </h3>
             </div>
             <div className="flex absolute w-[100px] h-[100px]">
-                    <ProgressRing
-                        radius={radius}
-                        stroke={6}
-                        progress={0}
-                    />
+                <ProgressRing
+                    radius={radius}
+                    stroke={6}
+                    progress={0}
+                />
             </div>
         </>
     )
