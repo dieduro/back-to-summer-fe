@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
 import { getLeaderboard } from "../lib/db";
 import { useAuth } from "../lib/auth.js";
@@ -6,8 +6,39 @@ import Button from "../ui/Button";
 import LeaderboardRow from "../components/LeaderboardRow";
 
 export default function Leaderboard({ data }) {
-  const players = data.users;
+
+  const topTenList = data.users.slice(0, 10)
+  const playersList = [] 
+  topTenList.map((user, index) => {
+    user.pos = index + 1
+    playersList.push(user)
+  })
+
+  const [leaderboard, setLeaderboard] = useState(playersList);
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      const userIndex = leaderboard.findIndex(
+        (player) => player.uid === user.uid
+      );
+      if (userIndex == -1) {
+  
+        for (let i = 0; i < data.users.length; i++) {
+          const element = data.users[i];
+          if (element.uid === user.uid) {
+            element.pos = i
+            setLeaderboard([...leaderboard, element])
+            break
+          }
+        }
+      }
+    } else if (user == false && leaderboard.length == 11) {
+      setLeaderboard(leaderboard.slice(0,10))
+    }
+  }, [user])
+  
+
 
   return (
     <div className="mx-auto w-11/12 sm:w-4/5 h-full">
@@ -21,7 +52,7 @@ export default function Leaderboard({ data }) {
         </div>
       <div className="flex items-center w-full md:w-3/4 mx-auto lg:px-4 py-4 ">
         <div className="overflow-x-auto w-full">
-        { !players || players.length === 0 ?
+        { !leaderboard || leaderboard.length === 0 ?
           <div className="w-3/4 mx-auto">
             <h3 className="text-white text-xl font-helvetica text-center">No hay registros para mostrar en este momento.</h3>
           </div>
@@ -41,11 +72,11 @@ export default function Leaderboard({ data }) {
               </tr>
             </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {players.map((player,i) => {
+                  {leaderboard.map((player) => {
                     if (player.roundsPlayed > 0) {
                       let isCurrentUser = false
                       if (user && player.uid === user.uid) { isCurrentUser = true}
-                      return <LeaderboardRow key={player.uid} player={player} index={i} isCurrentUser={isCurrentUser} />
+                      return <LeaderboardRow key={player.uid} player={player} isCurrentUser={isCurrentUser} />
                     } else {
                       return null
                     }
@@ -67,7 +98,6 @@ export default function Leaderboard({ data }) {
 export async function getServerSideProps(context) {
   const data = await getLeaderboard();
   if (data.error) {
-    console.log(data)
     return { props: { data: [] } };
   }
   return {
