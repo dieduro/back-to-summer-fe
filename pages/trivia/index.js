@@ -13,6 +13,7 @@ import theme from "../../theme.json";
 export default function Trivia() {
   const [ loading, setLoading ] = useState(true);
   const [ userData, setUserData ] = useState(null);
+  const [ error, setError ] = useState(false);
   const { user } = useAuth();
   const { triviaContext, setTriviaContext } = useTriviaContext();
   const router = useRouter()
@@ -40,6 +41,8 @@ export default function Trivia() {
         const triviaJson = JSON.stringify(data)
         const userData = {trivia: triviaJson, hasActiveTrivia: true}
         setActivteTriviaToUser(user.uid, userData )
+      } else if (data.error) {
+        setError(true)
       }
 
         setTriviaContext(data)
@@ -63,17 +66,19 @@ export default function Trivia() {
   }
 
   if (triviaContext?.length > 0) { return <Game trivia={triviaContext} user={userData} resetTriviaCb={onResetTrivia}/> }
-  else if (user == false) {
-    return ( 
-      <div className="content-center mx-auto w-80 mt-28">
-        <h1 className="font-helvetica text-white text-4xl">Por favor iniciá sesión para jugar</h1>
-        <Link href='/'><Button>Ir al Inicio</Button></Link>
-      </div>)
-  } else {
+  else if (error) {
     return ( 
       <div className="content-center mx-auto w-80 mt-28">
         <h1 className="font-helvetica text-white text-4xl">Lo sentimos! No pudimos encontrar una trivia disponible. Volvé a intentar por favor.</h1>
         <Link href='/'><Button>Ir al Inicio</Button></Link>
+      </div>)
+  } else {
+    return (
+      <div className="w-3/4 mx-auto">
+        <h1 className="font-blenny text-white text-4xl w-full text-center mb-2 mx-auto">Cargando</h1>
+        <div className="content-center mx-auto w-28 mt-12"> 
+          <Circles width="110" height="120" color={colors.white} />
+        </div>
       </div>)
   }
 }

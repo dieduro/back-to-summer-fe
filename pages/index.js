@@ -18,9 +18,6 @@ export default function Index() {
     }
   }, [user])
 
-  useEffect(async() => {
-    
-  }, [user])
 
   if (user == null) {
     return (

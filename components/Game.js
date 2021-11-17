@@ -16,10 +16,6 @@ const Score = ({ value }) => {
 const Game = ({ trivia, user, resetTriviaCb }) => {  
   if (!user) return null
 
-  if (user.currentResponses == 9 && (user.score > user.bestScore || user.roundsPlayed == 1)) {
-    setBestScore(user.uid, user.score)
-  }
-
   return (
     <div className="flex flex-col w-[100vw] mx-auto">
       <div className="flex flex-col mx-auto mt-2 self-center w-[100vw] h-auto">
@@ -33,7 +29,7 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
           <div className="flex flex-col justify-between w-1/2 mx-auto">
             <h3 className="text-white text-2xl font-helvetica text-center">¡Felicitaciones!</h3>
             {
-              user.bestScore >= user.score ?
+              user.roundsPlayed == 2 && user.firstRoundScore > user.secondRoundScore ?
                 <>
                   <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final en esta trivia fue: {user.score} </p>
                   <p className="text-white text-2xl font-helvetica text-center">Tu intento anterior fue mejor! Vamos a conservar ese 😃 </p>
@@ -42,7 +38,7 @@ const Game = ({ trivia, user, resetTriviaCb }) => {
               : 
                 <>
                   <p className="text-white text-2xl font-helvetica text-center">Tu puntaje final fue: </p>
-                  <Score value={user.score}/>
+                  <Score value={user.bestScore}/>
                 </>
 
             }
