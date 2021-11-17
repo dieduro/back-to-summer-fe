@@ -35,7 +35,11 @@ export default function Question({ data, index, forceWrongAnswer, questionAnswer
         question.isCorrect = false
       }
 
-      if (question.answered && question.timeUsed > -1) {
+      if (question.timeUsed) {
+        user.timeUsed += question.timeUsed
+      }
+
+      if (question.answered && user.timeUsed > -1) {
         if (question.type == TYPES.AUDIO) {
           audioRef.current.pause()
         }
@@ -53,16 +57,27 @@ export default function Question({ data, index, forceWrongAnswer, questionAnswer
         activeTrivia[row][col].answered = true
         activeTrivia[row][col].isCorrect = question.isCorrect
         const newCurrentResponses = user.currentResponses + 1
+        const currentScore = parseInt(user.score) + parseInt(score)
 
         const data = {
-          timeUsed: question.timeUsed,
-          score: parseInt(user.score) + parseInt(score),
+          timeUsed: user.timeUsed,
+          score: currentScore,
           answeredQuestions: answeredQuestions,
           trivia: JSON.stringify(activeTrivia),
           currentResponses : newCurrentResponses
         }
+
         if (newCurrentResponses == 9) {
           data.roundsPlayed = user.roundsPlayed + 1
+          
+          if (data.roundsPlayed == 1 ) {
+            data.firstRoundScore = data.score
+            data.bestScore = data.firstRoundScore
+          } else if (data.roundsPlayed == 2) {
+            data.secondRoundScore = data.score
+            data.bestScore = user.bestScore > data.secondRoundScore ? user.bestScore : data.secondRoundScore
+            data.status = 'finished'
+          }
         }
         
         setAnswer(user.uid, data)

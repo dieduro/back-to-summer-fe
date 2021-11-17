@@ -1,26 +1,30 @@
 import { read } from "../../../lib/sheetReader"
 
-const getCompany = async (email) => {
+const getUserData = async (email) => {
     const url = process.env.NEXT_PUBLIC_USERS_SHEEET_URL
-    let company
+    let userData
     await read(url).then(async (users) => {
         for (let i = 0; i < users.length; i++) {
             const user = users[i]
             if (user.MAIL === email) {
-                console.log(user)
-                company = user.EMPRESA
+                userData =
+                {
+                    name: `${user.NOMBRE} ${user.APELLIDO}`,
+                    company: user.EMPRESA
+                }
                 break
             }
         }
     })
-    return company
+    return userData
 };
 
 export default async function handler(req, res) {
     const email = req.query.email
-    const company = await getCompany(email)
+    const data = await getUserData(email)
+
     if (res.statusCode == 200) {
-      return res.status(200).json({company});
+      return res.status(200).json(data);
     } else {
         return res.status(500).json({
             message: 'Error 500 - H',
