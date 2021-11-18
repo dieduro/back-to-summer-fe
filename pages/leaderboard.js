@@ -95,12 +95,13 @@ export default function Leaderboard({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const data = await getLeaderboard();
   if (data.error) {
     return { props: { data: [] } };
   }
   return {
     props: { data },
+    revalidate: 10
   };
 }
