@@ -43,8 +43,12 @@ export default function Leaderboard({ data }) {
   return (
     <div className="mx-auto w-11/12 sm:w-4/5 h-full">
       
-      <Link href='/'><Button>⬅</Button></Link>
       <div className="relative h-auto">
+          <div className="absolute">
+            <Link href='/'>
+              <Button >⬅</Button>
+            </Link>
+          </div>
           <h1 className="w-64 mx-auto mt-8 p-2 text-white text-6xl text-center align-middle font-blenny leading-[0.6]">
             back to summer
           </h1>
