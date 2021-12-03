@@ -33,7 +33,7 @@ const Home = ({user}) => {
           </h1>
         </div>
 
-        { !user && <Login /> }
+        {/* { !user && <Login /> } */}
         
         <div className="flex flex-col justify-between w-4/5 lg:w-3/4 xl:w-3/5 mx-auto">
           <p className="flex flex-col justify-between w-full mx-auto my-6 text-white text-2xl lg:text-3xl font-helvetica italic">
