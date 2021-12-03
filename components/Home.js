@@ -7,6 +7,8 @@ import router from 'next/router';
 
 const Home = ({user}) => {
 
+  const gameFinished = true
+
   const onResetTrivia = async () => {
     await playNewTrivia(user)
     router.reload()
@@ -31,7 +33,7 @@ const Home = ({user}) => {
           </h1>
         </div>
 
-        { !user && <Login /> }
+        {/* { !user && <Login /> } */}
         
         <div className="flex flex-col justify-between w-4/5 lg:w-3/4 xl:w-3/5 mx-auto">
           <p className="flex flex-col justify-between w-full mx-auto my-6 text-white text-2xl lg:text-3xl font-helvetica italic">
@@ -65,7 +67,12 @@ const Home = ({user}) => {
                 </li>
               </Link>
           </ul>
-          { user &&
+          {
+            gameFinished ? 
+            <div className="relative flex flex-col justify-center mt-2 mb-6">
+              <h2 className="mb-4 mx-auto text-center text-white text-2xl font-helvetica font-bold">¡Finalizó el tiempo para participar! ¡Gracias por jugar con MEDIAMAX! 😊</h2>
+              <h3 className="mb-4 mx-auto text-center text-white text-2xl font-helvetica font-bold">Consultá la <Link href="/leaderboard"><a className="pointer underline text-dark">tabla de posiciones.</a></Link></h3>
+            </div> : user &&
           <div className="relative flex flex-col justify-center mt-2 mb-6"> 
               {
                 !roundFinished ?

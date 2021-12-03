@@ -11,6 +11,9 @@ import { Circles } from "@agney/react-loading";
 import theme from "../../theme.json";
 
 export default function Trivia() {
+
+  const gameFinished = true
+
   const [ loading, setLoading ] = useState(true);
   const [ userData, setUserData ] = useState(null);
   const [ error, setError ] = useState(false);
@@ -50,11 +53,12 @@ export default function Trivia() {
   }, [user])
 
   const onResetTrivia = async () => {
-    await playNewTrivia(user)
+    await playNewTrivia(userData)
     setTriviaContext(null)
     router.push('/')
   }
-
+  console.log(11, user)
+  console.log(22, userData)
   if (loading) {
     return (
       <div className="w-3/4 mx-auto">
@@ -62,6 +66,14 @@ export default function Trivia() {
         <div className="content-center mx-auto w-28 mt-12"> 
           <Circles width="110" height="120" color={colors.white} />
         </div>
+      </div>)
+  }
+
+  if (gameFinished) {
+    return( 
+      <div className="relative flex flex-col justify-center mt-2 mb-6">
+        <h2 className="mb-4 mx-auto text-center text-white text-2xl font-helvetica font-bold">¡Finalizó el tiempo para participar! ¡Gracias por jugar con MEDIAMAX! 😊</h2>
+        <h3 className="mb-4 mx-auto text-center text-white text-2xl font-helvetica font-bold">Consultá la <Link href="/leaderboard"><a className="pointer underline text-dark">tabla de posiciones.</a></Link></h3>
       </div>)
   }
 
